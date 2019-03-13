@@ -12,7 +12,8 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 
 /**
- * Write a description of JavaFX class PropertyViewerGUI here.
+ * Main class for the application
+ * instantiates starting window
  *
  * @author (your name)
  * @version (a version number or a date)
