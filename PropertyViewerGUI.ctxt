@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=PropertyViewerGUI
+comment0.text=\r\n\ Write\ a\ description\ of\ JavaFX\ class\ PropertyViewerGUI\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=stage
+comment1.target=void\ start(javafx.stage.Stage)
+comment2.params=e
+comment2.target=void\ backwards(javafx.event.ActionEvent)
+comment3.params=e
+comment3.target=void\ forwards(javafx.event.ActionEvent)
+numComments=4

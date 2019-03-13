@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Panes
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Panes\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Panes()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Panes\r\n
+comment2.params=
+comment2.target=javafx.scene.layout.Pane\ getCurrent()
+comment3.params=pointer
+comment3.target=javafx.scene.layout.Pane\ getCurrent(int)
+comment4.params=
+comment4.target=javafx.scene.layout.Pane\ next()
+comment5.params=
+comment5.target=javafx.scene.layout.Pane\ prev()
+numComments=6
