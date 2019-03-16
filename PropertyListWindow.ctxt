@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.target=PropertyListWindow
+comment0.text=\r\n\ This\ class\ parses\ all\ of\ the\ data\ from\ the\ airbnb\ csv\ file\r\n\ and\ stores\ it\ in\ a\ HashMap.\ The\ class\ iself\ extends\ HashMap\r\n\ for\ convenience.\ Neighbourhoods\ are\ used\ as\ keys\ and\ the\ values\ are\r\n\ ArrayLists\ of\ AirbnbListings,\ storing\ detailed\ information\ about\ each\r\n\ property.\ \r\n\ The\ class\ also\ keeps\ track\ of\ the\ min\ and\ max\ price\ in\ the\ database\r\n\ as\ well\ as\ what\ the\ current\ 'selected'\ (set\ by\ the\ GUI)\ borough\ is.\r\n\ \r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
+numComments=1

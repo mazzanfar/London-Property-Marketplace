@@ -1,0 +1,34 @@
+#priceDetails {
+    -fx-padding: 20 20 10 20;
+}
+
+#rightBtn {
+    -fx-padding: 0 15 0 0;
+}
+
+#leftBtn {
+    -fx-padding: 0 0 0 15;
+}
+
+#mainWinButtons {
+    -fx-background-radius: 50px;
+    -fx-font-size: 20pt;
+    -fx-font-family: 'Consolas', monospace;
+    -fx-text-align: center;
+    -fx-border: none;
+    -fx-background-color: #8e24aa;
+    -fx-text-fill: #fff;
+}
+
+#mainWinButtons:hover {
+    -fx-background-color: #6a1b9a;   
+    -fx-cursor: hand;
+}
+
+#mainWinButtons:pressed {
+    -fx-opacity: 0.75;
+} 
+
+#footerLabel {
+    -fx-padding: 0 0 8 8;
+}

@@ -6,7 +6,8 @@
  * has a corresponding field.
  */ 
 
-public class AirbnbListing {
+public class AirbnbListing 
+{
     /**
      * The id and name of the individual property
      */

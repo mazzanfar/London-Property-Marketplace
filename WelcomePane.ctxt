@@ -1,10 +1,7 @@
 #BlueJ class context
 comment0.target=WelcomePane
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ WelcomePane\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ This\ class\ parses\ all\ of\ the\ data\ from\ the\ airbnb\ csv\ file\r\n\ and\ stores\ it\ in\ a\ HashMap.\ The\ class\ iself\ extends\ HashMap\r\n\ for\ convenience.\ Neighbourhoods\ are\ used\ as\ keys\ and\ the\ values\ are\r\n\ ArrayLists\ of\ AirbnbListings,\ storing\ detailed\ information\ about\ each\r\n\ property.\ \r\n\ The\ class\ also\ keeps\ track\ of\ the\ min\ and\ max\ price\ in\ the\ database\r\n\ as\ well\ as\ what\ the\ current\ 'selected'\ (set\ by\ the\ GUI)\ borough\ is.\r\n\ \r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
 comment1.params=
 comment1.target=WelcomePane()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ WelcomePane\r\n
-comment2.params=y
-comment2.target=int\ sampleMethod(int)
-comment2.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\r\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\r\n
-numComments=3
+numComments=2
