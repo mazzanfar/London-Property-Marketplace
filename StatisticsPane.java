@@ -28,15 +28,19 @@ public class StatisticsPane extends BorderPane
     // the current state of the data from the HashMap
     private AirbnbDataMap data;
     private int minPrice, maxPrice;
+    private Statistics statistics; 
     
     /**
      * Constructor for objects of class StatisticsPane
      */
     public StatisticsPane()
-    {
+    {   
+        
         // by default it should be seen - until a borough is specified
         isActivated = false;
         
+        statistics = new Statistics(); 
+
         //placeholder image:
         Image image = new Image(getClass().getResourceAsStream("img/3.png"));
         Label label1 = new Label();
@@ -85,5 +89,6 @@ public class StatisticsPane extends BorderPane
         this.data=data;
         minPrice = min;
         maxPrice = max;
+        statistics.update(data); 
     }
 }
