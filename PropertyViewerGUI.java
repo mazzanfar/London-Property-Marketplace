@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
+import com.jfoenix.controls.JFXButton;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayList; 
@@ -30,7 +31,7 @@ public class PropertyViewerGUI extends Application
     // used for selecing a price range
     private RangeSlider priceSlider;
     // buttons
-    private Button forwardButton, backButton;
+    private JFXButton forwardButton, backButton;
     
     @Override
     public void start(Stage stage)
@@ -51,31 +52,32 @@ public class PropertyViewerGUI extends Application
         //TODO: implement event listeners to call the changedPriceRange method
         Label currentPrice = new Label("make this show selected price");
         VBox priceDetails = new VBox(priceSlider, currentPrice);
-        priceDetails.setId("priceDetails");
         priceDetails.setAlignment(Pos.CENTER);
+        priceDetails.getStyleClass().add("priceDetails");
         
         
         
         //LEFT:
-        backButton = new Button("<");
+        backButton = new JFXButton("<");
         backButton.setOnAction(this::backwards);
         backButton.setPrefSize(40, 40);
-        backButton.setId("mainWinButtons");
-        BorderPane leftBtn = new BorderPane();
-        // center it byputting it in a border pane
-        leftBtn.setCenter(backButton);
-        leftBtn.setId("leftBtn");
+        backButton.setMaxSize(40, 40);
+        backButton.getStyleClass().add("mainWinButtons");
+        VBox backButtonWrap = new VBox(backButton);
+        backButtonWrap.setPrefWidth(80);
+        backButtonWrap.setAlignment(Pos.CENTER);
         
         //RIGHT:
-        forwardButton = new Button(">");
+        forwardButton = new JFXButton(">");
         forwardButton.setOnAction(this::forwards);
         forwardButton.setPrefSize(40, 40);
-        forwardButton.setId("mainWinButtons");
-        BorderPane rightBtn = new BorderPane();
-        // center it by putting it in a broder pane
-        rightBtn.setCenter(forwardButton);
-        rightBtn.setId("rightBtn");
+        forwardButton.setMaxSize(40, 40);
+        forwardButton.getStyleClass().add("mainWinButtons");
+        VBox forwardButtonWrap = new VBox(forwardButton);
+        forwardButtonWrap.setPrefWidth(80);
+        forwardButtonWrap.setAlignment(Pos.CENTER);
         
+
         // disable buttons if there is only 1 active pane
         if(!mainPanes.isMoreThanOnePaneActive())
         {
@@ -92,15 +94,17 @@ public class PropertyViewerGUI extends Application
         
         //BOTTOM:
         Label footerLabel = new Label("copyright text info bla bla");
-        footerLabel.setId("footerLabel");
+        footerLabel.getStyleClass().add("footerLabel");
         
         //CENTER:
         //the center pane is the getCurrent() method from Panes
         
-        root = new BorderPane(mainPanes.getCurrent(), priceDetails, rightBtn, footerLabel, leftBtn);
-        
+        root = new BorderPane(mainPanes.getCurrent(), priceDetails, forwardButtonWrap, footerLabel, backButtonWrap);
+        root.setAlignment(backButton, Pos.CENTER);
+        root.setAlignment(forwardButton, Pos.CENTER);
         Scene scene = new Scene(root, 860, 630);
-        scene.getStylesheets().add("style.css");
+        scene.getStylesheets().add("mainStyle.css");
+        scene.getStylesheets().add("boroughPaneStyle.css");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);

@@ -28,6 +28,13 @@ public class WelcomePane extends BorderPane
      */
     public WelcomePane()
     {
+        setPrefHeight(500);
+        setMinHeight(500);
+        setMaxHeight(500);
+        setPrefWidth(700);
+        setMinWidth(700);
+        setMaxWidth(700);
+        
         //placeholder image:
         Image image = new Image(getClass().getResourceAsStream("img/1.png"));
         Label label1 = new Label();

@@ -1,15 +1,19 @@
 #BlueJ class context
 comment0.target=StatisticsPane
-comment0.text=\r\n\ This\ class\ parses\ all\ of\ the\ data\ from\ the\ airbnb\ csv\ file\r\n\ and\ stores\ it\ in\ a\ HashMap.\ The\ class\ iself\ extends\ HashMap\r\n\ for\ convenience.\ Neighbourhoods\ are\ used\ as\ keys\ and\ the\ values\ are\r\n\ ArrayLists\ of\ AirbnbListings,\ storing\ detailed\ information\ about\ each\r\n\ property.\ \r\n\ The\ class\ also\ keeps\ track\ of\ the\ min\ and\ max\ price\ in\ the\ database\r\n\ as\ well\ as\ what\ the\ current\ 'selected'\ (set\ by\ the\ GUI)\ borough\ is.\r\n\ \r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
+comment0.text=\r\n\ This\ class\ will\ show\ statistics\ for\ all\ properties\ in\ the\ currently\ selected\ borough\r\n\ and\ price\ range.\ TODO\:\ implement\ funcionality\r\n\ \r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
 comment1.params=
 comment1.target=StatisticsPane()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ StatisticsPane\r\n
 comment2.params=
 comment2.target=void\ activate()
+comment2.text=\r\n\ Indicate\ that\ the\ pane\ is\ activated.\r\n\ Invoked\ when\ a\ price\ range\ from\ the\ RangeSlider\ is\ selected.\r\n
 comment3.params=
 comment3.target=void\ deactivate()
+comment3.text=\r\n\ If\ needed,\ deactivate\ the\ pane\r\n
 comment4.params=
 comment4.target=boolean\ isActivated()
+comment4.text=\r\n\ Check\ if\ the\ pane\ is\ active\ or\ not\r\n\ @return\ true\ if\ the\ pane\ is\ active\r\n
 comment5.params=min\ max\ data
-comment5.target=void\ updateStats(int,\ int,\ AirbnbDataMap)
+comment5.target=void\ updateStatistics(int,\ int,\ AirbnbDataMap)
+comment5.text=\r\n\ Updates\ the\ statics\r\n\ Invoked\ when\ a\ new\ price\ range\ or\ a\ new\ borough\ has\ been\ selected\r\n\ TODO\:\ implement\r\n\ \r\n\ @param\ min\ the\ minimum\ price\ from\ the\ RangeSlider\r\n\ @param\ max\ the\ maximum\ price\ from\ the\ RangeSlider\r\n\ @param\ data\ the\ current\ state\ of\ the\ data\ from\ the\ HashMaps\r\n
 numComments=6

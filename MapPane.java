@@ -36,6 +36,13 @@ public class MapPane extends BorderPane
      */
     public MapPane()
     {
+        setPrefHeight(500);
+        setMinHeight(500);
+        setMaxHeight(500);
+        setPrefWidth(700);
+        setMinWidth(700);
+        setMaxWidth(700);
+        
         // by default it shouldnt be visible
         isActivated = false;
         

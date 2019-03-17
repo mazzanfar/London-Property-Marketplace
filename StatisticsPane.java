@@ -34,6 +34,13 @@ public class StatisticsPane extends BorderPane
      */
     public StatisticsPane()
     {
+        setPrefHeight(500);
+        setMinHeight(500);
+        setMaxHeight(500);
+        setPrefWidth(700);
+        setMinWidth(700);
+        setMaxWidth(700);
+        
         // by default it should be seen - until a borough is specified
         isActivated = false;
         
