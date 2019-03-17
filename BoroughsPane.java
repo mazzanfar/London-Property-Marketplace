@@ -3,14 +3,19 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
+import com.jfoenix.controls.JFXButton;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import javafx.fxml.*;
+import java.net.URL;
+import java.io.File;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,11 +47,19 @@ public class BoroughsPane extends BorderPane
     // the min and max selected prices from the RangeSlider
     private int minPrice, maxPrice;
     
+    @FXML
+    private ArrayList<JFXButton> testButton;
+    
+    @FXML
+    private AnchorPane buttonWrap;
+    
     /**
      * Constructor for objects of class BoroughsPane
      */
     public BoroughsPane()
     {
+        
+
         isActivated = false;
         
         setPrefHeight(500);
@@ -56,12 +69,15 @@ public class BoroughsPane extends BorderPane
         setMinWidth(700);
         setMaxWidth(700);
         
-        // placeholder image:
-        Image image = new Image(getClass().getResourceAsStream("img/boroughs.png"));
-        Label label1 = new Label();
-        label1.setGraphic(new ImageView(image));
-        
-        setCenter(label1);
+        // placeholder image: 
+        try {
+            URL url = new File("boroughPane.fxml").toURL();
+            buttonWrap = FXMLLoader.load(url);
+            setCenter(buttonWrap);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
     
     /**
