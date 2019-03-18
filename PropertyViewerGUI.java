@@ -12,7 +12,9 @@ import com.jfoenix.controls.JFXButton;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayList; 
-
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.input.*;
 /**
  * This class is the main class of the application
  * Control everything
@@ -30,32 +32,56 @@ public class PropertyViewerGUI extends Application
     private AirbnbDataMap data;
     // used for selecing a price range
     private RangeSlider priceSlider;
+    // used to show the selected price
+    private Label priceLabel;
     // buttons
     private JFXButton forwardButton, backButton;
     
     @Override
-    public void start(Stage stage)
+    public void start(Stage stage) throws Exception
     {
-        // get data and init panes
+        // get data and init the panes in the center
         data = new AirbnbDataMap();
         mainPanes = new MainPanes(this);
 
         //TOP:
         int min = data.getMinPrice();
         int max = data.getMaxPrice();
-        priceSlider = new RangeSlider(min, max, min, max);
-        priceSlider.setBlockIncrement(100);
-        priceSlider.setShowTickMarks(true);
-        priceSlider.setShowTickLabels(true);
-        //priceSlider.setSnapToTicks(true);
-        priceSlider.setMajorTickUnit(max-min);
-        //TODO: implement event listeners to call the changedPriceRange method
-        Label currentPrice = new Label("make this show selected price");
-        VBox priceDetails = new VBox(priceSlider, currentPrice);
-        priceDetails.setAlignment(Pos.CENTER);
-        priceDetails.getStyleClass().add("priceDetails");
+            // create the double slider:
+            priceSlider = new RangeSlider(min, max, min, max);
+            priceSlider.setShowTickMarks(true);
+            priceSlider.setShowTickLabels(true);
+            priceSlider.setMajorTickUnit((max-min)/8);
+            priceSlider.setMinorTickCount(15);
+            priceSlider.getStyleClass().add("priceSlider");
         
+            // events for the double slider:
+            priceSlider.highValueProperty().addListener(new ChangeListener() {
+                @Override
+                public void changed(ObservableValue arg0, Object arg1, Object arg2) {
+                    updatePriceLabel();
+                }
+            });
+            priceSlider.lowValueProperty().addListener(new ChangeListener() {
+                @Override
+                public void changed(ObservableValue arg0, Object arg1, Object arg2) {
+                    updatePriceLabel();
+                }
+            });
+            priceSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent event) {
+                    changedPriceRange(); // TODO: change from mouse click to some drag even
+                }
+            });
+            
+            // create the label, displaying info from the slider
+            priceLabel = new Label("Please select a price range.");
+            priceLabel.getStyleClass().add("priceLabel");
         
+        // place slider and label in a vbox
+        VBox priceSelection = new VBox(priceLabel, priceSlider);
+        priceSelection.setAlignment(Pos.CENTER);
+        priceSelection.getStyleClass().add("priceSelection");
         
         //LEFT:
         backButton = new JFXButton("<");
@@ -85,13 +111,6 @@ public class PropertyViewerGUI extends Application
             backButton.setDisable(true);
         }
         
-        // TODO: remove this method from here and make it be invoked
-        // based on events from the price slider
-        // the requirements specify that only the welcome pane
-        // should be shown until a price is selected and this method
-        // will make other panes visible
-        changedPriceRange();
-        
         //BOTTOM:
         Label footerLabel = new Label("copyright text info bla bla");
         footerLabel.getStyleClass().add("footerLabel");
@@ -99,12 +118,12 @@ public class PropertyViewerGUI extends Application
         //CENTER:
         //the center pane is the getCurrent() method from Panes
         
-        root = new BorderPane(mainPanes.getCurrent(), priceDetails, forwardButtonWrap, footerLabel, backButtonWrap);
+        root = new BorderPane(mainPanes.getCurrent(), priceSelection, forwardButtonWrap, footerLabel, backButtonWrap);
         root.setAlignment(backButton, Pos.CENTER);
         root.setAlignment(forwardButton, Pos.CENTER);
+        root.getStyleClass().add("rootPane");
         Scene scene = new Scene(root, 860, 630);
         scene.getStylesheets().add("mainStyle.css");
-        scene.getStylesheets().add("boroughPaneStyle.css");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
@@ -122,8 +141,8 @@ public class PropertyViewerGUI extends Application
     
     private void changedPriceRange()
     {
-        //TODO: implement this to get values from slider
         mainPanes.updatePriceRange();
+        root.setCenter(mainPanes.focusBoroughsPane());
         
         // if there are more than one active panes and any of the buttons is disabled
         // enable the buttons
@@ -146,17 +165,26 @@ public class PropertyViewerGUI extends Application
     public int getMinSelectedPrice()
     {
         //TODO: make this to get values from slider
-        return 50;
+        return (int) priceSlider.getLowValue();
     }
     
     public int getMaxSelectedPrice()
     {
         //TODO: make this to get values from slider
-        return 100;
+        return (int) priceSlider.getHighValue();
     }
     
     public AirbnbDataMap getData()
     {
         return data;
+    }
+    
+    private void updatePriceLabel()
+    {
+        priceLabel.textProperty().setValue(
+        "Currently showing properties from " + 
+        String.valueOf((int) priceSlider.getLowValue()) + 
+        " to " + 
+        String.valueOf((int) priceSlider.getHighValue()));
     }
 }
