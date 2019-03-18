@@ -3,40 +3,40 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="500.0" maxWidth="700.0" minHeight="500.0" minWidth="700.0" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton id="testButton" layoutX="300.0" layoutY="14.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="336.0" layoutY="68.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="265.0" layoutY="68.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="194.0" layoutY="68.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="371.0" layoutY="122.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="300.0" layoutY="122.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="229.0" layoutY="122.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="158.0" layoutY="122.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="87.0" layoutY="122.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="513.0" layoutY="122.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="442.0" layoutY="122.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="336.0" layoutY="176.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="265.0" layoutY="176.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="194.0" layoutY="176.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="123.0" layoutY="176.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="52.0" layoutY="176.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="478.0" layoutY="176.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="407.0" layoutY="176.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="371.0" layoutY="230.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="300.0" layoutY="230.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="229.0" layoutY="230.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="158.0" layoutY="230.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="87.0" layoutY="230.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="442.0" layoutY="230.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="336.0" layoutY="284.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="265.0" layoutY="284.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="194.0" layoutY="284.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="123.0" layoutY="284.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="407.0" layoutY="284.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="371.0" layoutY="338.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="300.0" layoutY="338.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="229.0" layoutY="338.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
-      <JFXButton id="testButton" layoutX="158.0" layoutY="338.0" prefHeight="73.0" prefWidth="70.0" styleClass="test-button" stylesheets="@boroughPaneStyle.css" text="Button" />
+      <JFXButton id="testButton" layoutX="331.0" layoutY="14.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="365.0" layoutY="67.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="297.0" layoutY="67.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="400.0" layoutY="120.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="332.0" layoutY="120.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="263.0" layoutY="120.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="195.0" layoutY="120.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="367.0" layoutY="173.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="299.0" layoutY="173.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="230.0" layoutY="173.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="162.0" layoutY="173.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="402.0" layoutY="226.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="334.0" layoutY="226.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="265.0" layoutY="226.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="197.0" layoutY="226.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="437.0" layoutY="279.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="369.0" layoutY="279.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="300.0" layoutY="279.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="232.0" layoutY="279.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="230.0" layoutY="67.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="127.0" layoutY="120.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="537.0" layoutY="120.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="469.0" layoutY="120.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="503.0" layoutY="173.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="435.0" layoutY="173.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="93.0" layoutY="172.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="128.0" layoutY="226.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="162.0" layoutY="279.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="470.0" layoutY="226.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="403.0" layoutY="332.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="335.0" layoutY="332.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="266.0" layoutY="332.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
+      <JFXButton id="testButton" layoutX="198.0" layoutY="332.0" prefHeight="75.0" prefWidth="70.0" styleClass="boroughButton" text="Button" />
    </children>
 </AnchorPane>
