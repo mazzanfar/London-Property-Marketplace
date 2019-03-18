@@ -1,9 +1,0 @@
-.test-button {
-    -fx-shape: "M 240 300 L 340 240 L 440 300 L 440 400 L 340 460 L 240 400 L 240 300";
-    -fx-background-color: #8e24aa;
-    -fx-text-fill: #fff;
-}
-
-.test-button:hover {
-    -fx-cursor: hand;
-}
