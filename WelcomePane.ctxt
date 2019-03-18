@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=WelcomePane
-comment0.text=\r\n\ obvious\r\n\ \r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
-comment1.params=
-comment1.target=WelcomePane()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ WelcomePane\r\n
-numComments=2
