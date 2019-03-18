@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=PropertyDetailsWindow
+comment0.text=\n\ TODO\:\ implement\n\ \n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\n\ @version\ 1.0\n
+comment1.params=
+comment1.target=PropertyDetailsWindow()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ PropertyDetailsWindow\n
+comment2.params=y
+comment2.target=int\ sampleMethod(int)
+comment2.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\n
+numComments=3

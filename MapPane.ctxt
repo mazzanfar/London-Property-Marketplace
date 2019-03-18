@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=MapPane
+comment0.text=\n\ This\ class\ has\ to\ be\ implemented\ to\ show\ pins\ for\ all\ the\ properties\n\ in\ the\ current\ burrow.\ Extends\ BorderPane.\n\ TODO\:\ implement\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\n\ @version\ 1.0\n
+comment1.params=
+comment1.target=MapPane()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ MapPane\n
+comment2.params=
+comment2.target=void\ activate()
+comment2.text=\n\ Indicate\ that\ the\ pane\ is\ activated.\n\ Invoked\ when\ a\ price\ range\ from\ the\ RangeSlider\ is\ selected.\n
+comment3.params=
+comment3.target=void\ deactivate()
+comment3.text=\n\ If\ needed,\ deactivate\ the\ pane\n
+comment4.params=
+comment4.target=boolean\ isActivated()
+comment4.text=\n\ Check\ if\ the\ pane\ is\ active\ or\ not\n\ @return\ true\ if\ the\ pane\ is\ active\n
+comment5.params=min\ max\ data
+comment5.target=void\ updateMap(int,\ int,\ AirbnbDataMap)
+comment5.text=\n\ Update\ what\ should\ be\ shown\ on\ the\ pane\n\ Invoked\ when\ the\ price\ ranged\ has\ changed\ or\ a\ new\ borough\ has\ been\ selected\n\ \n\ TODO\:\ implement\ functionality.\n\ \n\ @param\ min\ the\ minimum\ price\ selected\ from\ the\ RangeSlider\n\ @param\ max\ the\ maximum\ price\ selected\ from\ the\ RangeSlider\n\ @param\ data\ the\ current\ state\ of\ the\ HashMap\n
+numComments=6

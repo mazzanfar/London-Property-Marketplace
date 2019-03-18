@@ -172,4 +172,9 @@ public class PropertyListWindow extends Application
         //get this from the slider (welcomePane)
         return 600;
     }
+    
+    private void test()
+    {
+        
+    }
 }

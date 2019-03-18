@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=BoroughButton
+comment0.text=\n\ Write\ a\ description\ of\ class\ BoroughButton\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=btnText\ boroughName
+comment1.target=BoroughButton(java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getBoroughName()
+numComments=3
