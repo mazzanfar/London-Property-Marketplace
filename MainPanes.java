@@ -96,6 +96,12 @@ public class MainPanes
         return getCurrent();
     }
     
+    public Pane focusBoroughsPane()
+    {
+        pointer = 1;
+        return getCurrent();
+    }
+    
     /**
      * A new price range has been selected from the GUI
      * Adjust all panes accordingly
@@ -122,24 +128,15 @@ public class MainPanes
         // get the price range
         int min = referenceToGUI.getMinSelectedPrice();
         int max = referenceToGUI.getMaxSelectedPrice();
+
+        BoroughsPane reference = (BoroughsPane) panes.get(1);
         
-        try {
-            // check if the pane has been activated or not
-            Method checkActive =  panes.get(1).getClass().getMethod("isActivated");
-            Object isPaneActive =  checkActive.invoke(panes.get(1));
-            if(!((boolean) isPaneActive)) { // activate:
-                Method activate =  panes.get(1).getClass().getMethod("activate");
-                activate.invoke(panes.get(1));
-                // increment so that the buttons will scroll properly
-                numberOfActivePanes ++;
-            }
-            
-            // invoke the updatePriceRange method on the boroughPane
-            Method updatePriceRange = panes.get(1).getClass().getMethod("updatePriceRange", int.class, int.class, MainPanes.class, AirbnbDataMap.class);
-            updatePriceRange.invoke(panes.get(1), min, max, this, referenceToGUI.getData());
-        } catch(Exception e) {
-            System.out.println(e);
-        } 
+        if(!reference.isActivated()) {
+            reference.activate();
+            numberOfActivePanes ++;
+        }
+        
+        reference.updatePriceRange(min, max, this, referenceToGUI.getData());
     }
     
     /**
@@ -153,23 +150,14 @@ public class MainPanes
         int min = referenceToGUI.getMinSelectedPrice();
         int max = referenceToGUI.getMaxSelectedPrice();
 
-        try {
-            // check if the pane has been activated or not
-            Method checkActive =  panes.get(2).getClass().getMethod("isActivated");
-            Object isPaneActive =  checkActive.invoke(panes.get(2));
-            if(!((boolean) isPaneActive)) {// activate:
-                Method activate =  panes.get(2).getClass().getMethod("activate");
-                activate.invoke(panes.get(2));
-                // increment so that the buttons will scroll properly
-                numberOfActivePanes ++;
-            }
-            
-            // invoke the updateStatistics method on the statistcsPane
-            Method updateStatistics = panes.get(2).getClass().getMethod("updateStatistics", int.class, int.class, AirbnbDataMap.class);
-            updateStatistics.invoke(panes.get(2), min, max, referenceToGUI.getData());
-        } catch(Exception e) {
-            System.out.println(e);
-        } 
+        StatisticsPane reference = (StatisticsPane) panes.get(2);
+        
+        if(!reference.isActivated()) {
+            reference.activate();
+            numberOfActivePanes ++;
+        }
+        
+        reference.updateStatistics(min, max, referenceToGUI.getData()); 
     }
     
     /**
@@ -183,24 +171,14 @@ public class MainPanes
         int min = referenceToGUI.getMinSelectedPrice();
         int max = referenceToGUI.getMaxSelectedPrice();
         
-        try {
-            // check if the pane has been activated or not
-            Method checkActive =  panes.get(3).getClass().getMethod("isActivated");
-            Object isPaneActive =  checkActive.invoke(panes.get(3));
-            if(!((boolean) isPaneActive)) { // activate:
-                Method activate =  panes.get(3).getClass().getMethod("activate");
-                activate.invoke(panes.get(3));
-                // increment so that the buttons will scroll properly
-                numberOfActivePanes ++;
-            }
-            
-            //invoke the updateMap method on the mapPane
-            Method updateMap = panes.get(3).getClass().getMethod("updateMap", int.class, int.class, AirbnbDataMap.class);
-            updateMap.invoke(panes.get(3), min, max, referenceToGUI.getData());
-        } catch(Exception e) {
-            System.out.println(e);
-        } 
-         
+        MapPane reference = (MapPane) panes.get(3);
+        
+        if(!reference.isActivated()) {
+            reference.activate();
+            numberOfActivePanes ++;
+        }
+        
+        reference.updateMap(min, max, referenceToGUI.getData()); 
     }
     
     /**
