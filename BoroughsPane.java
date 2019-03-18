@@ -17,6 +17,23 @@ import javafx.fxml.*;
 import java.net.URL;
 import java.io.File;
 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.geometry.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import org.controlsfx.control.RangeSlider;
+import com.jfoenix.controls.JFXButton;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.ArrayList; 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.input.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -47,8 +64,7 @@ public class BoroughsPane extends BorderPane
     // the min and max selected prices from the RangeSlider
     private int minPrice, maxPrice;
     
-    @FXML
-    private ArrayList<JFXButton> testButton;
+    private ArrayList<BoroughButton> boroughButtons;
     
     @FXML
     private AnchorPane buttonWrap;
@@ -69,11 +85,17 @@ public class BoroughsPane extends BorderPane
         setMinWidth(700);
         setMaxWidth(700);
         
-        // placeholder image: 
         try {
             URL url = new File("boroughPane.fxml").toURL();
             buttonWrap = FXMLLoader.load(url);
+            
+            Image image = new Image(getClass().getResourceAsStream("img/heatMap.png"), 200, 40, false, false);
+            Label heatMapLegend = new Label();
+            heatMapLegend.setGraphic(new ImageView(image));
+            
             setCenter(buttonWrap);
+            setBottom(heatMapLegend);
+            setAlignment(heatMapLegend, Pos.CENTER);
         }
         catch(Exception e){
             System.out.println(e);
