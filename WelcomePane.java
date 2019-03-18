@@ -4,17 +4,18 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.geometry.Insets;
+import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
+import com.jfoenix.controls.JFXButton;
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.ArrayList;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import java.util.ArrayList; 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.input.*;
 /**
  * obvious
  * 
@@ -36,10 +37,17 @@ public class WelcomePane extends BorderPane
         setMaxWidth(700);
         
         //placeholder image:
-        Image image = new Image(getClass().getResourceAsStream("img/1.png"));
-        Label label1 = new Label();
-        label1.setGraphic(new ImageView(image));
+            Label welcomeLabel1 = new Label("Welcome to the AirBnB London Property Marketplace!");
+            welcomeLabel1.setWrapText(true);
+            welcomeLabel1.getStyleClass().add("welcomeLabel1");
+            Separator separator = new Separator();
+            Label welcomeLabel2 = new Label("Please select a price range above to get started.");
+            welcomeLabel2.getStyleClass().add("welcomeLabel2");
+        VBox welcomeWrap = new VBox(welcomeLabel1, separator, welcomeLabel2);
+        welcomeWrap.setMaxWidth(400);
+        welcomeWrap.setPrefHeight(500);
+        welcomeWrap.setAlignment(Pos.CENTER);
         
-        setCenter(label1);
+        setCenter(welcomeWrap);
     }
 }
