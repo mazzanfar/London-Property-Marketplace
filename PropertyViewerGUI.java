@@ -1,3 +1,4 @@
+
 //TODO: sort imports
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -10,17 +11,16 @@ import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
 /**
- * This class is the main class of the application
- * Control everything
+ * This class is the main class of the application Control everything
  * 
- * @author Alexis Dumon, Federico Barbero, Martin Todorov and Maximilian Ghazanfar
+ * @author Alexis Dumon, Federico Barbero, Martin Todorov and Maximilian
+ *         Ghazanfar
  * @version 1.0
  */
-public class PropertyViewerGUI extends Application
-{
+public class PropertyViewerGUI extends Application {
     // All of the panes that will cycle in the center of the screen
     private MainPanes mainPanes;
     // the root
@@ -31,32 +31,29 @@ public class PropertyViewerGUI extends Application
     private RangeSlider priceSlider;
     // buttons
     private Button forwardButton, backButton;
-    
+
     @Override
-    public void start(Stage stage)
-    {
+    public void start(Stage stage) {
         // get data and init panes
         data = new AirbnbDataMap();
         mainPanes = new MainPanes(this);
 
-        //TOP:
+        // TOP:
         int min = data.getMinPrice();
         int max = data.getMaxPrice();
         priceSlider = new RangeSlider(min, max, min, max);
         priceSlider.setBlockIncrement(100);
         priceSlider.setShowTickMarks(true);
         priceSlider.setShowTickLabels(true);
-        //priceSlider.setSnapToTicks(true);
-        priceSlider.setMajorTickUnit(max-min);
-        //TODO: implement event listeners to call the changedPriceRange method
+        // priceSlider.setSnapToTicks(true);
+        priceSlider.setMajorTickUnit(max - min);
+        // TODO: implement event listeners to call the changedPriceRange method
         Label currentPrice = new Label("make this show selected price");
         VBox priceDetails = new VBox(priceSlider, currentPrice);
         priceDetails.setId("priceDetails");
         priceDetails.setAlignment(Pos.CENTER);
-        
-        
-        
-        //LEFT:
+
+        // LEFT:
         backButton = new Button("<");
         backButton.setOnAction(this::backwards);
         backButton.setPrefSize(40, 40);
@@ -65,8 +62,8 @@ public class PropertyViewerGUI extends Application
         // center it byputting it in a border pane
         leftBtn.setCenter(backButton);
         leftBtn.setId("leftBtn");
-        
-        //RIGHT:
+
+        // RIGHT:
         forwardButton = new Button(">");
         forwardButton.setOnAction(this::forwards);
         forwardButton.setPrefSize(40, 40);
@@ -75,84 +72,75 @@ public class PropertyViewerGUI extends Application
         // center it by putting it in a broder pane
         rightBtn.setCenter(forwardButton);
         rightBtn.setId("rightBtn");
-        
+
         // disable buttons if there is only 1 active pane
-        if(!mainPanes.isMoreThanOnePaneActive())
-        {
+        if (!mainPanes.isMoreThanOnePaneActive()) {
             forwardButton.setDisable(true);
             backButton.setDisable(true);
         }
-        
+
         // TODO: remove this method from here and make it be invoked
         // based on events from the price slider
         // the requirements specify that only the welcome pane
         // should be shown until a price is selected and this method
         // will make other panes visible
         changedPriceRange();
-        
-        //BOTTOM:
+
+        // BOTTOM:
         Label footerLabel = new Label("copyright text info bla bla");
         footerLabel.setId("footerLabel");
-        
-        //CENTER:
-        //the center pane is the getCurrent() method from Panes
-        
+
+        // CENTER:
+        // the center pane is the getCurrent() method from Panes
+
         root = new BorderPane(mainPanes.getCurrent(), priceDetails, rightBtn, footerLabel, leftBtn);
-        
+
         Scene scene = new Scene(root, 860, 630);
         scene.getStylesheets().add("style.css");
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
     }
-    
-    private void backwards(ActionEvent e)
-    {
+
+    private void backwards(ActionEvent e) {
         root.setCenter(mainPanes.prev());
     }
-    
-    private void forwards(ActionEvent e)
-    {
+
+    private void forwards(ActionEvent e) {
         root.setCenter(mainPanes.next());
     }
-    
-    private void changedPriceRange()
-    {
-        //TODO: implement this to get values from slider
+
+    private void changedPriceRange() {
+        // TODO: implement this to get values from slider
         mainPanes.updatePriceRange();
-        
+
         // if there are more than one active panes and any of the buttons is disabled
         // enable the buttons
-        if(mainPanes.isMoreThanOnePaneActive() && forwardButton.isDisabled()) {
+        if (mainPanes.isMoreThanOnePaneActive() && forwardButton.isDisabled()) {
             forwardButton.setDisable(false);
             backButton.setDisable(false);
         }
     }
-    
-    public void setSelectedBorough(String boroughName)
-    {
+
+    public void setSelectedBorough(String boroughName) {
         data.setCurrentBorough(boroughName);
     }
-    
-    public String getSelectedBorough(String boroughName)
-    {
+
+    public String getSelectedBorough(String boroughName) {
         return data.getCurrentBorough();
     }
-    
-    public int getMinSelectedPrice()
-    {
-        //TODO: make this to get values from slider
+
+    public int getMinSelectedPrice() {
+        // TODO: make this to get values from slider
         return 50;
     }
-    
-    public int getMaxSelectedPrice()
-    {
-        //TODO: make this to get values from slider
+
+    public int getMaxSelectedPrice() {
+        // TODO: make this to get values from slider
         return 100;
     }
-    
-    public AirbnbDataMap getData()
-    {
+
+    public AirbnbDataMap getData() {
         return data;
     }
 }

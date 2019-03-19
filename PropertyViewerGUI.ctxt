@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=PropertyViewerGUI
-comment0.text=\r\n\ This\ class\ is\ the\ main\ class\ of\ the\ application\r\n\ Control\ everything\r\n\ \r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
+comment0.text=\n\ This\ class\ is\ the\ main\ class\ of\ the\ application\ Control\ everything\n\ \n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\n\ \ \ \ \ \ \ \ \ Ghazanfar\n\ @version\ 1.0\n
 comment1.params=stage
 comment1.target=void\ start(javafx.stage.Stage)
 comment2.params=e

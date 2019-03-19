@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=AirbnbListing
-comment0.text=\r\n\ Represents\ one\ listing\ of\ a\ property\ for\ rental\ on\ Airbnb.\r\n\ This\ is\ essentially\ one\ row\ in\ the\ data\ table.\ Each\ column\r\n\ has\ a\ corresponding\ field.\r\n
+comment0.text=\n\ Represents\ one\ listing\ of\ a\ property\ for\ rental\ on\ Airbnb.\n\ This\ is\ essentially\ one\ row\ in\ the\ data\ table.\ Each\ column\n\ has\ a\ corresponding\ field.\n
 comment1.params=id\ name\ host_id\ host_name\ neighbourhood\ latitude\ longitude\ room_type\ price\ minimumNights\ numberOfReviews\ lastReview\ reviewsPerMonth\ calculatedHostListingsCount\ availability365
 comment1.target=AirbnbListing(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ double,\ double,\ java.lang.String,\ int,\ int,\ int,\ java.lang.String,\ double,\ int,\ int)
 comment10.params=
