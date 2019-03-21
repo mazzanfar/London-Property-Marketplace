@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import com.opencsv.CSVReader;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -14,39 +13,59 @@ import java.util.Set;
 import java.util.List;
 
 /**
- * This class parses all of the data from the airbnb csv file
- * and stores it in a HashMap. The class iself extends HashMap
- * for convenience. Neighbourhoods are used as keys and the values are
- * ArrayLists of AirbnbListings, storing detailed information about each
- * property. 
- * The class also keeps track of the min and max price in the database
- * as well as what the current 'selected' (set by the GUI) borough is.
+ * TODO: comment here
  * 
  * @author Alexis Dumon, Federico Barbero, Martin Todorov and Maximilian Ghazanfar
  * @version 1.0
  */
 public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
 {
+    // the lowest and highest priced properties
     private int minPrice, maxPrice;
+    // the currently selected borough (from the GUI);
     private String currentSelectedBorough;
+    // all the boroughs indexed with respect to their geographical location
+    private ArrayList<String> geoOrderedBoroughs;
+    // the favorites list
+    private ArrayList<AirbnbListing> favorites;
     
     /**
      * Construct the map by loading the data in it
      */
     public AirbnbDataMap()
     {
-        maxPrice = 0;
-        minPrice = 100000; //TODO: implement this better :D
+        geographicallyOrderBoroughs();
         load();
+        favorites = new ArrayList<AirbnbListing>();
+        //hardCodeFavorites(); // TODO: not hardcode
+    }
+    
+    private void hardCodeFavorites()
+    {
+        favorites = get("Havering");
+    }
+    
+    public ArrayList<AirbnbListing> getFavoriteProperties()
+    {
+        return favorites;
     }
     
     /**
      * 
-     * @return true if a borough has been selected (by the GUI)
+     * @return the minimum price found in data
      */
-    public boolean isBoroughSelected()
+    public int getMinPrice()
     {
-        return (currentSelectedBorough == null);
+        return minPrice;
+    }
+    
+    /**
+     * 
+     * @return the maximum price found in data
+     */
+    public int getMaxPrice()
+    {
+        return maxPrice;
     }
     
     /**
@@ -85,6 +104,116 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
         return get(name);
     }
     
+    /**
+     * @return the geographic order of boroughs
+     */
+    public ArrayList<String> getGeoOrderedBoroughs()
+    {
+        return geoOrderedBoroughs;
+    }
+    
+    /**
+     * @param key the borough to get properties from
+     * @param min the minimum price of properties
+     * @param max the maximum price of properties
+     * @return an array list of listings with properties matching the description
+     */
+    public ArrayList<AirbnbListing> getWithinPriceRange(String key, int min, int max)
+    {
+        ArrayList<AirbnbListing> result = new ArrayList<AirbnbListing>();
+        
+        for(AirbnbListing listing : get(key))  {
+            if(listing.getPrice() <= max && listing.getPrice() >= min) {
+                result.add(listing);
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * @param min the minimum price
+     * @param max the maximum price
+     * @return the number of properties within a price range
+     */
+    public int getWithinPriceRange(int min, int max)
+    {
+        int count = 0;
+        
+        for(String key : keySet())  {
+            for(AirbnbListing listing : get(key)) { 
+                if(listing.getPrice() <= max && listing.getPrice() >= min) {
+                    count ++;
+                }
+            }
+        }
+        return count;
+    }
+    
+    public void setFavorite(String neighbourhood, String id)
+    {
+        for(AirbnbListing listing : get(neighbourhood)) {
+            if(id.equals(listing.getId())) {
+                listing.setFavorite();
+                favorites.add(listing);
+                return;
+            }
+        }
+    }
+    
+    /**
+     * Set the geographic order of the boroughs
+     * Used when creating the buttons in the BoroughsPane
+     */
+    private void geographicallyOrderBoroughs()
+    {
+        geoOrderedBoroughs = new ArrayList<String>();
+        geoOrderedBoroughs.add("Enfield");
+        geoOrderedBoroughs.add("Barnet");
+        geoOrderedBoroughs.add("Haringey");
+        geoOrderedBoroughs.add("Waltham Forest");
+        geoOrderedBoroughs.add("Harrow");
+        geoOrderedBoroughs.add("Brent");
+        geoOrderedBoroughs.add("Camden");
+        geoOrderedBoroughs.add("Islington");
+        geoOrderedBoroughs.add("Hackney");
+        geoOrderedBoroughs.add("Redbridge");
+        geoOrderedBoroughs.add("Havering");
+        geoOrderedBoroughs.add("Hillingdon");
+        geoOrderedBoroughs.add("Ealing");
+        geoOrderedBoroughs.add("Kensington and Chelsea");
+        geoOrderedBoroughs.add("Westminster");
+        geoOrderedBoroughs.add("Tower Hamlets");
+        geoOrderedBoroughs.add("Newham");
+        geoOrderedBoroughs.add("Barking and Dagenham");
+        geoOrderedBoroughs.add("Hounslow");
+        geoOrderedBoroughs.add("Hammersmith and Fulham");
+        geoOrderedBoroughs.add("Wandsworth");
+        geoOrderedBoroughs.add("City of London");
+        geoOrderedBoroughs.add("Greenwich");
+        geoOrderedBoroughs.add("Bexley");
+        geoOrderedBoroughs.add("Richmond upon Thames");
+        geoOrderedBoroughs.add("Merton");
+        geoOrderedBoroughs.add("Lambeth");
+        geoOrderedBoroughs.add("Southwark");
+        geoOrderedBoroughs.add("Lewisham");
+        geoOrderedBoroughs.add("Kingston upon Thames");
+        geoOrderedBoroughs.add("Sutton");
+        geoOrderedBoroughs.add("Croydon");
+        geoOrderedBoroughs.add("Bromley");
+    }
+    
+    public AirbnbListing getPropertyById(String id)
+    {
+        for(String key : keySet()) {
+            for(AirbnbListing listing : get(key)) {
+                if(listing.getId().equals(id)) {
+                    return listing;
+                }
+            }
+        }
+        
+        return null;
+    }
     /** 
      * Load the CSV file and iterate through every row, storing data in 
      * an AirbnbListing object and map boroughs to properties with a HashMap
@@ -98,7 +227,8 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
             String [] line;
             //skip the first row (column headers)
             reader.readNext();
-            while ((line = reader.readNext()) != null) {                    
+            while ((line = reader.readNext()) != null) {
+
                 String id = line[0];
                 String name = line[1];
                 String host_id = line[2];
@@ -109,10 +239,15 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
                 String room_type = line[7];
                 int price = convertInt(line[8]);
 
-                if(price > maxPrice) { // keep track of maxPrice
+                if(isEmpty()) { // the first iteration
                     maxPrice = price;
-                } else if(price < minPrice) { // keep track of minPrice
                     minPrice = price;
+                } else {
+                    if(price > maxPrice) { // keep track of maxPrice
+                        maxPrice = price;
+                    } else if(price < minPrice) { // keep track of minPrice
+                        minPrice = price;
+                    }
                 }
 
                 int minimumNights = convertInt(line[9]);
@@ -167,23 +302,5 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
             return Integer.parseInt(intString);
         }
         return -1;
-    }
-    
-    /**
-     * 
-     * @return the minimum price found in data
-     */
-    public int getMinPrice()
-    {
-        return minPrice;
-    }
-    
-    /**
-     * 
-     * @return the maximum price found in data
-     */
-    public int getMaxPrice()
-    {
-        return maxPrice;
     }
 }

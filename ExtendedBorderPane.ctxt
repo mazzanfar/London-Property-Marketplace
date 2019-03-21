@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=ExtendedBorderPane
+comment0.text=\r\n\ This\ class\ extends\ the\ BorderPane\ javafx\ class,\ adding\ functionality\r\n\ that\ all\ of\ the\ non-static\ panes\ (the\ ones\ that\ require\ change\ everytime\r\n\ a\ new\ price\ range\ has\ been\ selected\ require).\r\n\ \r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
+comment1.params=data
+comment1.target=ExtendedBorderPane(AirbnbDataMap)
+comment1.text=\r\n\ Super\ constructor\r\n
+comment2.params=
+comment2.target=void\ activate()
+comment2.text=\r\n\ Indicate\ that\ the\ pane\ has\ been\ activated.\r\n\ Invoked\ when\ a\ price\ range\ from\ the\ RangeSlider\ is\ selected.\r\n
+comment3.params=
+comment3.target=boolean\ isActivated()
+comment3.text=\r\n\ Check\ if\ the\ pane\ is\ active\ or\ not\r\n\ @return\ true\ if\ the\ pane\ is\ active\r\n
+comment4.params=min\ max
+comment4.target=void\ updatePriceRange(int,\ int)
+comment4.text=\r\n\ Updates\ the\ pane\ \r\n\ Invoked\ when\ a\ new\ price\ range\ has\ been\ selected\r\n\ \r\n\ @param\ min\ the\ minimum\ price\ from\ the\ RangeSlider\r\n\ @param\ max\ the\ maximum\ price\ from\ the\ RangeSlider\r\n
+comment5.params=
+comment5.target=void\ updateView()
+comment5.text=\r\n\ Update\ the\ pane\ to\ show\ properties\ within\ the\ new\ price\ range\r\n
+numComments=6

@@ -1,5 +1,3 @@
- 
-
 /**
  * Represents one listing of a property for rental on Airbnb.
  * This is essentially one row in the data table. Each column
@@ -8,6 +6,7 @@
 
 public class AirbnbListing 
 {
+    private boolean isFavorite;
     /**
      * The id and name of the individual property
      */
@@ -84,8 +83,24 @@ public class AirbnbListing
         this.reviewsPerMonth = reviewsPerMonth;
         this.calculatedHostListingsCount = calculatedHostListingsCount;
         this.availability365 = availability365;
+        this.isFavorite = false;
     }
 
+    public boolean isFavorite()
+    {
+        return isFavorite;
+    }
+    
+    public void setFavorite()
+    {
+        isFavorite = true;
+    }
+    
+    public void removeFavorite()
+    {
+        isFavorite = false;
+    }
+    
     public String getId() {
         return id;
     }

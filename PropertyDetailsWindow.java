@@ -1,4 +1,6 @@
 //TODO: sort imports
+import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Label;
 
 /**
  * TODO: implement
@@ -9,26 +11,22 @@
 public class PropertyDetailsWindow
 {
     // instance variables - replace the example below with your own
-    private int x;
-
+    private AirbnbListing property;
+    private BorderPane root;
     /**
      * Constructor for objects of class PropertyDetailsWindow
      */
-    public PropertyDetailsWindow()
+    public PropertyDetailsWindow(AirbnbListing property)
     {
-        // initialise instance variables
-        x = 0;
+        this.property = property;
+        System.out.println(property.getId());
+        
+        root = new BorderPane(new Label(property.getHost_name()), null, null, null, null);
+        
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
+    
+    public BorderPane getView()
     {
-        // put your code here
-        return x + y;
+        return root;
     }
 }

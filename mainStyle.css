@@ -1,23 +1,255 @@
-.priceDetails {
+@font-face {
+    font-family: Roboto;
+    src: url("./+libs/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto-Bold;
+    src: url("./+libs/Roboto-Bold.ttf");
+}
+
+*{
+    primary-color: #FF5A5F;
+}
+
+.rootPane {
+    -fx-background-color: #2A2E37;
+    -fx-font-family: Roboto;
+    -fx-text-fill: #fff;
+}
+
+.priceSelection {
     -fx-padding: 20 20 10 20;
 }
 
+.pricePrefix {
+    -fx-padding: 0 0 15 0;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #CCC;
+}
+
+.priceNumber {
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 15 0;
+    -fx-font-size: 12pt;
+    -fx-text-fill: #CCC;
+}
+
+.priceSlider .range-bar {
+    -fx-background-color: primary-color;
+}
+
+.priceSlider .track{
+    -fx-background-color: #ccc;
+    -fx-text-fill: #ccc;
+    
+}
+
+.priceSlider .axis{
+    -fx-tick-label-fill: #ccc;
+}
+
+.priceSlider .low-thumb, .high-thumb {
+
+    -fx-effect: none;
+    -fx-background-color: #ccc;
+    -fx-border-size: 2;
+    -fx-border-color: #2A2E37;
+    -fx-border-radius: 10px;
+}
+
+.priceSlider .low-thumb:hover, .high-thumb:hover {
+    -fx-cursor: hand;
+    -fx-effect: none;
+    -fx-background-color: #ccc;
+}
 
 .mainWinButtons {
-    -fx-background-radius: 50px;
+    -fx-background-radius: 60px;
     -fx-font-size: 20pt;
     -fx-font-family: 'Consolas', monospace;
     -fx-text-align: center;
     -fx-border: none;
-    -fx-background-color: #8e24aa;
-    -fx-text-fill: #fff;
+    -fx-background-color: primary-color;
+    -fx-text-fill: #fff;    
 }
 
 .mainWinButtons:hover {
-    -fx-background-color: #6a1b9a;   
     -fx-cursor: hand;
+    
+    -fx-effect: dropshadow(three-pass-box, #fff, 3, 0, 0, 0);
 }
 
 .footerLabel {
     -fx-padding: 0 0 8 8;
+    -fx-text-fill: #ccc;
+}
+
+
+.welcomeLabel1 {
+    -fx-font-size: 26pt;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 20 0;
+    -fx-text-alignment: center;
+    -fx-text-fill: #CCC;
+}
+
+.welcomeLabel2 {
+    -fx-text-fill: #CCC;
+    -fx-padding: 20 0 0 0;
+}
+
+.boroughButton {
+    -fx-shape: "M 240 300 L 340 240 L 440 300 L 440 400 L 340 460 L 240 400 L 240 300";
+    -fx-text-fill: #fff;
+}
+
+.boroughButton:hover {
+    -fx-cursor: hand;
+    -fx-border: none;
+    -fx-scale-x: 1.15;
+    -fx-scale-y: 1.15;
+    -fx-effect: dropshadow(three-pass-box, #ccc, 2, 5, 0, 0);
+}
+
+.heatMapLegend {
+    -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #ffb2b3, #ce4a4e); 
+}
+
+.smallLabelBoroughsPane {
+    -fx-text-fill: #b2b2b2;
+    -fx-font-size: 10;
+}
+
+.bigLabelBoroughsPane {
+    -fx-text-fill: #ccc;
+    -fx-font-size: 12;
+    -fx-padding: 0 0 5 0;
+}
+
+.label1test {
+    -fx-font-size: 50pt;
+}
+
+.favoritesHeader {
+    -fx-text-fill: #ccc;
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-padding: 15 0 0 0;
+}
+
+.favoritesInfo {
+    -fx-text-fill: #ccc;
+    -fx-font-size: 10pt;
+    -fx-padding: 15 0 20 0;
+}
+
+.favoritesButton {
+    -fx-text-fill: #fff;
+    -fx-font-size: 14;
+    -fx-background-color: primary-color;
+    -fx-pref-height: 40;
+    -fx-pref-width: 100;
+}
+
+.favoritesButton:hover {
+    -fx-cursor: hand
+}
+
+.guideLabel {
+    -fx-text-fill: #ccc;
+    -fx-font-size: 10pt;
+}
+
+.propertyLabel {
+    -fx-padding: 0 0 0 50;
+}
+
+.propertyWrapper {
+    -fx-background-color: #3e4554;
+    -fx-background-radius: 50px;
+    -fx-padding: 20 0 20 0;
+}
+
+
+.scroll-pane {
+    -fx-background: #2A2E37;
+    -fx-padding: 0px;
+}
+
+.scroll-bar:vertical > .track-background, .scroll-bar:horizontal > .track-background {
+    -fx-background-color: #2A2E37;
+    -fx-background-insets: 0.0;
+}
+
+.scroll-bar:vertical > .thumb, .scroll-bar:horizontal > .thumb {
+    -fx-background-color: #BCBCBC;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 1.0;
+    -fx-background-radius: 10;
+}
+
+.scroll-bar:vertical > .thumb:pressed, .scroll-bar:horizontal > .thumb:pressed {
+    -fx-background-color: #666;
+}
+
+.scroll-bar:vertical > .thumb:hover, .scroll-bar:horizontal > .thumb:hover {
+    -fx-cursor: hand;
+}
+
+/* Up- and Down-Button Padding */
+.scroll-bar:vertical > .increment-button, .scroll-bar:vertical > .decrement-button {
+    -fx-padding: 5 2 5 2;
+}
+
+/* Left- and Right-Button Padding */
+.scroll-bar:horizontal > .increment-button, .scroll-bar:horizontal > .decrement-button {
+    -fx-padding: 2 5 2 5;
+}
+
+.scroll-bar > .increment-button, .scroll-bar > .decrement-button, .scroll-bar:hover > .increment-button, .scroll-bar:hover > .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar > .increment-button > .increment-arrow, .scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: rgb(150.0, 150.0, 150.0);
+}
+
+/* Up Arrow */
+.scroll-bar:vertical > .increment-button > .increment-arrow {
+    -fx-shape: "M298 426h428l-214 214z";
+}
+
+/* Down Arrow */
+.scroll-bar:vertical > .decrement-button > .decrement-arrow {
+    -fx-shape: "M298 598l214-214 214 214h-428z";
+}
+
+/* Right Arrow */    
+.scroll-bar:horizontal > .increment-button > .increment-arrow {
+    -fx-shape: "M0 428l0 -428l214 214l-214 214z";
+}
+
+/* Left Arrow */
+.scroll-bar:horizontal > .decrement-button > .decrement-arrow {
+    -fx-shape: "M214 0l0 428l-214 -214l214 -214z";
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Scroll Pane			                                                       *
+ *                                                                             *
+ ******************************************************************************/
+
+.scroll-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .corner {
+    -fx-background-insets: 0;
 }

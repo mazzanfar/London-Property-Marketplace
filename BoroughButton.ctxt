@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=BoroughButton
+comment0.text=\r\n\ TODO\:\ comment\ here\r\n\r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
+comment1.params=text\ boroughName
+comment1.target=BoroughButton(java.lang.String,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ BoroughButton\r\n
+comment2.params=
+comment2.target=java.lang.String\ getBoroughOfButton()
+comment2.text=\r\n\ @return\ the\ name\ of\ the\ borough\ this\ button\ is\ representing\r\n
+numComments=3

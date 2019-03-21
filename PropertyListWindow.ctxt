@@ -1,4 +1,9 @@
 #BlueJ class context
 comment0.target=PropertyListWindow
 comment0.text=\r\n\ TODO\:\ implement\r\n\ \r\n\ @author\ Alexis\ Dumon,\ Federico\ Barbero,\ Martin\ Todorov\ and\ Maximilian\ Ghazanfar\r\n\ @version\ 1.0\r\n
-numComments=1
+comment1.params=data
+comment1.target=PropertyListWindow(AirbnbDataMap)
+comment2.params=
+comment2.target=javafx.scene.layout.Pane\ getView()
+comment2.text=\r\n\ @return\ the\ root\ Pane\ of\ this\ window\r\n
+numComments=3
