@@ -33,7 +33,7 @@ public class PanesController
         // load the data
         data = new AirbnbDataMap();
         
-        // add them to an ArrayList (so they can be indexed)
+        // create panes and add them to an ArrayList (so they can be indexed)
         panes = new ArrayList<ExtendedBorderPane>();
         
         panes.add(new WelcomePane());
