@@ -10,7 +10,7 @@ import javafx.scene.layout.BorderPane;
  */
 public abstract class ExtendedBorderPane extends BorderPane
 {
-    // whehter a pane should be visible or not
+    // whether a pane should be visible or not
     private boolean isActivated;
     // a reference to the current state of the data HashMap
     protected AirbnbDataMap data;
