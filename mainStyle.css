@@ -204,7 +204,7 @@
     -fx-font-family: Roboto-Bold;
     -fx-background-color: #3e4554;
     -fx-background-radius: 50px;
-    -fx-padding: 15 0 20 0;
+    -fx-padding: 15 0 25 0;
 }
 
 /* Styling for the scroll pane (including scroll bar) */
