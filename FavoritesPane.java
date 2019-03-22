@@ -141,7 +141,6 @@ public class FavoritesPane extends ExtendedBorderPane
         // init wrapper, add header and guide label, center, add spacing
         wrapper = new VBox(headerWrapper, guideLabel);
         wrapper.setAlignment(Pos.TOP_CENTER);
-        
         wrapper.setSpacing(30);
         
         // init scroll panes that handles VBox overflow, center,
@@ -150,6 +149,7 @@ public class FavoritesPane extends ExtendedBorderPane
         scrollWrapper.setContent(wrapper);
         scrollWrapper.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollWrapper.setMaxWidth(600);
+        scrollWrapper.setPannable(true);
         scrollWrapper.setPrefWidth(600);
 
             // a spacer label to provide space between the footerlabel
