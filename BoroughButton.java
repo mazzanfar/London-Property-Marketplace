@@ -6,7 +6,7 @@ import javafx.scene.control.Tooltip;
  * It extends the JFXButton class (a Button with material design effects) by adding
  * a private string field which registers the borough of the button. It is used
  * to avoid setting the borough based on the button text, as localization of the app
- * would then change the button text and thus crash the application
+ * would then change the button text and thus crash the application.
  *
  * @author Alexis Dumon, Federico Barbero, Martin Todorov and Maximilian Ghazanfar
  * @version 1.0
