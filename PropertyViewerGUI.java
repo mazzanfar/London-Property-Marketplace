@@ -37,14 +37,14 @@ public class PropertyViewerGUI extends Application
                          TOOLTIP_DISABLED_PREFIX, TOOLTIP_NEXT_PREFIX,
                          TOOLTIP_PREV_PREFIX, WINDOW_TITLE_PREFIX;
     static {
-         PRICE_FROM_PREFIX = "Currently showing properties from: ";
-         PRICE_TO_PREFIX = " to: ";
-         PRICE_PLEASE_SELECT_PREFIX = "Use the slider below to select a desired price range.";
-         FOOTER_PREFIX = "Number of properties available: ";
-         TOOLTIP_DISABLED_PREFIX = "Please select a price range first";
-         TOOLTIP_NEXT_PREFIX = "Next";
-         TOOLTIP_PREV_PREFIX = "Previous";
-         WINDOW_TITLE_PREFIX = "London Property Marketplace (AirBnB)";
+        PRICE_FROM_PREFIX = "Currently showing properties from: ";
+        PRICE_TO_PREFIX = " to: ";
+        PRICE_PLEASE_SELECT_PREFIX = "Use the slider below to select a desired price range.";
+        FOOTER_PREFIX = "Number of properties available: ";
+        TOOLTIP_DISABLED_PREFIX = "Please select a price range first";
+        TOOLTIP_NEXT_PREFIX = "Next";
+        TOOLTIP_PREV_PREFIX = "Previous";
+        WINDOW_TITLE_PREFIX = "London Property Marketplace (AirBnB)";
     }
     // All of the panes that will cycle in the center of the screen
     private PanesController panesController;
@@ -56,12 +56,12 @@ public class PropertyViewerGUI extends Application
     private Label priceLabelFrom, priceLabelTo, priceLow, priceHigh, footerLabel;
     // buttons
     private JFXButton forwardButton, backButton;
-    
+
     /**
      * Starting the application...
      */
     @Override
-    public void start(Stage stage) throws Exception
+    public void start(final Stage stage) throws Exception
     {
         // init panes controller
         panesController = new PanesController();
