@@ -109,7 +109,7 @@
     -fx-border: none;
     -fx-scale-x: 1.15;
     -fx-scale-y: 1.15;
-    -fx-effect: dropshadow(three-pass-box, #ccc, 2, 5, 0, 0);
+    -fx-border-color: #fff;
 }
 
 .heatMapLegend {
@@ -152,9 +152,24 @@
     -fx-pref-width: 100;
 }
 
-.favoritesButton:hover {
-    -fx-cursor: hand
+.moreBtn {
+    -fx-pref-width: 150;
 }
+
+.favoritesButton:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, #fff, 3, 0, 0, 0);
+}
+
+.headerLabelProperty {
+    -fx-padding: 8 22 8 22;
+    -fx-font-size: 14;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 30;
+    -fx-background-color: #4a556b;
+    -fx-effect: dropshadow(three-pass-box, #303030, 3, 0, 0, 0);
+}
+    
 
 .guideLabel {
     -fx-text-fill: #ccc;
@@ -162,13 +177,14 @@
 }
 
 .propertyLabel {
-    -fx-padding: 0 0 0 50;
+    -fx-padding: 0 0 10 10;
+    -fx-font-size: 12;
 }
 
 .propertyWrapper {
     -fx-background-color: #3e4554;
     -fx-background-radius: 50px;
-    -fx-padding: 20 0 20 0;
+    -fx-padding: 15 0 20 0;
 }
 
 
