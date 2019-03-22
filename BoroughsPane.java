@@ -193,7 +193,7 @@ public class BoroughsPane extends ExtendedBorderPane
         data.setCurrentBorough(btn.getBoroughOfButton());
         
         // get the list of properties in that borough
-        PropertyListWindow propList = new PropertyListWindow(data);
+        PropertyListWindow propList = new PropertyListWindow(data.get(data.getCurrentBorough()));
         Pane newWinRoot = propList.getView();
         
         // put the list in a new scene
