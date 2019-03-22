@@ -190,15 +190,18 @@ public class BoroughsPane extends ExtendedBorderPane
         // get the name of borough it is representing
         // (from a private field so that localization is seamless)
         // and set it as the selected borough in the HashMap
-        data.setCurrentBorough(btn.getBoroughOfButton());
+        String borough = btn.getBoroughOfButton();
+        
+        data.setCurrentBorough(borough);
         
         // get the list of properties in that borough
-        PropertyListWindow propList = new PropertyListWindow(data.get(data.getCurrentBorough()));
+        PropertyListWindow propList = new PropertyListWindow(data.getWithinPriceRange(borough, minPrice, maxPrice));
         Pane newWinRoot = propList.getView();
         
         // put the list in a new scene
         Scene newScene = new Scene(newWinRoot);
         newScene.getStylesheets().add("propertyListStyle.css");
+        newScene.getStylesheets().add("mainStyle.css");
 
         // put the scene in the new window
         popUpWin.setScene(newScene);
