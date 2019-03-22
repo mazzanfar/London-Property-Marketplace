@@ -17,8 +17,8 @@ public class WelcomePane extends ExtendedBorderPane
     // decalre static label prefixes for easier localization of the app:
     private static final String WELCOME_PREFIX, PLEASE_SELECT_PREFIX;
     static {
-         WELCOME_PREFIX = "Welcome to the AirBnB London Property Marketplace!";
-         PLEASE_SELECT_PREFIX = "Please select a price range above to get started.";
+        WELCOME_PREFIX = "Welcome to the AirBnB London Property Marketplace!";
+        PLEASE_SELECT_PREFIX = "Please select a price range above to get started.";
     }
     
     /**
