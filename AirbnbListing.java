@@ -6,6 +6,7 @@
 
 public class AirbnbListing 
 {
+    // if the property is favorite or not
     private boolean isFavorite;
     /**
      * The id and name of the individual property
@@ -83,6 +84,8 @@ public class AirbnbListing
         this.reviewsPerMonth = reviewsPerMonth;
         this.calculatedHostListingsCount = calculatedHostListingsCount;
         this.availability365 = availability365;
+
+        // by default no property is marked as favorite
         this.isFavorite = false;
     }
 
