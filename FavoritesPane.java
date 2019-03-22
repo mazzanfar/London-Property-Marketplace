@@ -149,7 +149,6 @@ public class FavoritesPane extends ExtendedBorderPane
         scrollWrapper.setContent(wrapper);
         scrollWrapper.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollWrapper.setMaxWidth(600);
-        scrollWrapper.setPannable(true);
         scrollWrapper.setPrefWidth(600);
 
             // a spacer label to provide space between the footerlabel
