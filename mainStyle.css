@@ -1,40 +1,43 @@
 @font-face {
-    font-family: Roboto;
-    src: url("./+libs/Roboto-Regular.ttf");
-}
-
-@font-face {
     font-family: Roboto-Bold;
     src: url("./+libs/Roboto-Bold.ttf");
 }
 
+/* Define accent and background color: */
 *{
     primary-color: #FF5A5F;
+    primary-background-color: #2A2E37;
 }
 
+/* Styling for the main window */
 .rootPane {
     -fx-background-color: #2A2E37;
-    -fx-font-family: Roboto;
+    -fx-font-family: Roboto-Bold;
     -fx-text-fill: #fff;
 }
 
+/* Styling for the price labels displaying info from the slider: */
 .priceSelection {
+    -fx-font-family: Roboto-Bold;
     -fx-padding: 20 20 10 20;
 }
 
 .pricePrefix {
+    -fx-font-family: Roboto-Bold;
     -fx-padding: 0 0 15 0;
     -fx-font-size: 10pt;
     -fx-text-fill: #CCC;
 }
 
 .priceNumber {
+    -fx-font-family: Roboto-Bold;
     -fx-font-weight: bold;
     -fx-padding: 0 0 15 0;
     -fx-font-size: 12pt;
     -fx-text-fill: #CCC;
 }
 
+/* Styling for the price range double slider: */
 .priceSlider .range-bar {
     -fx-background-color: primary-color;
 }
@@ -42,7 +45,6 @@
 .priceSlider .track{
     -fx-background-color: #ccc;
     -fx-text-fill: #ccc;
-    
 }
 
 .priceSlider .axis{
@@ -50,7 +52,6 @@
 }
 
 .priceSlider .low-thumb, .high-thumb {
-
     -fx-effect: none;
     -fx-background-color: #ccc;
     -fx-border-size: 2;
@@ -64,6 +65,7 @@
     -fx-background-color: #ccc;
 }
 
+/* Styling for the back and forward buttons: */
 .mainWinButtons {
     -fx-background-radius: 60px;
     -fx-font-size: 20pt;
@@ -76,30 +78,38 @@
 
 .mainWinButtons:hover {
     -fx-cursor: hand;
-    
     -fx-effect: dropshadow(three-pass-box, #fff, 3, 0, 0, 0);
 }
 
+/* Styling for the footer label: */
 .footerLabel {
+    -fx-font-family: Roboto-Bold;
     -fx-padding: 0 0 8 8;
     -fx-text-fill: #ccc;
 }
 
-
+/* Styling for the big header welcome label: */
 .welcomeLabel1 {
-    -fx-font-size: 26pt;
+    -fx-font-family: Roboto-Bold;
     -fx-font-weight: bold;
+    -fx-font-size: 26pt;
     -fx-padding: 0 0 20 0;
     -fx-text-alignment: center;
     -fx-text-fill: #CCC;
 }
 
+/* Styling for the small welcome label: */
 .welcomeLabel2 {
+    -fx-font-family: Roboto-Bold;
+    -fx-font-size: 16;
     -fx-text-fill: #CCC;
     -fx-padding: 20 0 0 0;
 }
 
+/* Styling for the buttons in the boroughs pane: */
 .boroughButton {
+    -fx-font-family: Roboto-Bold;
+    /* hexagon shape svg string: */
     -fx-shape: "M 240 300 L 340 240 L 440 300 L 440 400 L 340 460 L 240 400 L 240 300";
     -fx-text-fill: #fff;
 }
@@ -112,39 +122,44 @@
     -fx-border-color: #fff;
 }
 
+/* Styling for the heat map legend: */
 .heatMapLegend {
+    /* gradient background */
     -fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #ffb2b3, #ce4a4e); 
 }
 
 .smallLabelBoroughsPane {
+    -fx-font-family: Roboto-Bold;
     -fx-text-fill: #b2b2b2;
-    -fx-font-size: 10;
+    -fx-font-size: 12;
 }
 
 .bigLabelBoroughsPane {
+    -fx-font-family: Roboto-Bold;
+    -fx-font-weight: bold;
     -fx-text-fill: #ccc;
-    -fx-font-size: 12;
+    -fx-font-size: 13;
     -fx-padding: 0 0 5 0;
 }
 
-.label1test {
-    -fx-font-size: 50pt;
-}
-
+/* Styling for the header of the favorites pane: */
 .favoritesHeader {
+    -fx-font-family: Roboto-Bold;
+    -fx-font-weight: bold;
     -fx-text-fill: #ccc;
     -fx-font-size: 24;
-    -fx-font-weight: bold;
     -fx-padding: 15 0 0 0;
 }
 
 .favoritesInfo {
+    -fx-font-family: Roboto-Bold;
     -fx-text-fill: #ccc;
     -fx-font-size: 10pt;
     -fx-padding: 15 0 20 0;
 }
 
 .favoritesButton {
+    -fx-font-family: Roboto-Bold;
     -fx-text-fill: #fff;
     -fx-font-size: 14;
     -fx-background-color: primary-color;
@@ -152,16 +167,25 @@
     -fx-pref-width: 100;
 }
 
-.moreBtn {
-    -fx-pref-width: 150;
-}
-
 .favoritesButton:hover {
     -fx-cursor: hand;
     -fx-effect: dropshadow(three-pass-box, #fff, 3, 0, 0, 0);
 }
 
+
+.guideLabel {
+    -fx-font-family: Roboto-Bold;
+    -fx-text-fill: #ccc;
+    -fx-font-size: 10pt;
+}
+
+/* Styling for the PropertyLister class: */
+.moreBtn {
+    -fx-pref-width: 150;
+}
+
 .headerLabelProperty {
+    -fx-font-family: Roboto-Bold;
     -fx-padding: 8 22 8 22;
     -fx-font-size: 14;
     -fx-text-fill: #fff;
@@ -169,27 +193,23 @@
     -fx-background-color: #4a556b;
     -fx-effect: dropshadow(three-pass-box, #303030, 3, 0, 0, 0);
 }
-    
-
-.guideLabel {
-    -fx-text-fill: #ccc;
-    -fx-font-size: 10pt;
-}
 
 .propertyLabel {
+    -fx-font-family: Roboto-Bold;
     -fx-padding: 0 0 10 10;
     -fx-font-size: 12;
 }
 
 .propertyWrapper {
+    -fx-font-family: Roboto-Bold;
     -fx-background-color: #3e4554;
     -fx-background-radius: 50px;
     -fx-padding: 15 0 20 0;
 }
 
-
+/* Styling for the scroll pane (including scroll bar) */
 .scroll-pane {
-    -fx-background: #2A2E37;
+    -fx-background: primary-background-color;
     -fx-padding: 0px;
 }
 
@@ -213,12 +233,10 @@
     -fx-cursor: hand;
 }
 
-/* Up- and Down-Button Padding */
 .scroll-bar:vertical > .increment-button, .scroll-bar:vertical > .decrement-button {
     -fx-padding: 5 2 5 2;
 }
 
-/* Left- and Right-Button Padding */
 .scroll-bar:horizontal > .increment-button, .scroll-bar:horizontal > .decrement-button {
     -fx-padding: 2 5 2 5;
 }
@@ -231,31 +249,21 @@
     -fx-background-color: rgb(150.0, 150.0, 150.0);
 }
 
-/* Up Arrow */
 .scroll-bar:vertical > .increment-button > .increment-arrow {
     -fx-shape: "M298 426h428l-214 214z";
 }
 
-/* Down Arrow */
 .scroll-bar:vertical > .decrement-button > .decrement-arrow {
     -fx-shape: "M298 598l214-214 214 214h-428z";
 }
 
-/* Right Arrow */    
 .scroll-bar:horizontal > .increment-button > .increment-arrow {
     -fx-shape: "M0 428l0 -428l214 214l-214 214z";
 }
 
-/* Left Arrow */
 .scroll-bar:horizontal > .decrement-button > .decrement-arrow {
     -fx-shape: "M214 0l0 428l-214 -214l214 -214z";
 }
-
-/*******************************************************************************
- *                                                                             *
- * Scroll Pane			                                                       *
- *                                                                             *
- ******************************************************************************/
 
 .scroll-pane {
     -fx-background-insets: 0;
