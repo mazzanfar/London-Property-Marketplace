@@ -49,7 +49,7 @@ public class PropertyLister extends VBox
         COUNT_PREFIX = "Showing: ";
         SHOW_MORE_PREFIX = "Show More";
         DETAILS_POPUP_PREFIX = "Showing details for property id: " ;
-        maxLoad = 25;
+        maxLoad = 20;
     }
     
     // the stage for the pop-up
@@ -139,20 +139,20 @@ public class PropertyLister extends VBox
                 viewBtnWrapper.setMinWidth(150);
                 viewBtnWrapper.setAlignment(Pos.CENTER);
                 
-                // wrap the labels in a gridpane, center, set dimensions
+            // wrap the labels in a gridpane, center, set dimensions
                 GridPane gridPane = new GridPane();
                 gridPane.add(hostName, 0, 0);
                 gridPane.add(propertyPrice, 0, 1);
-                gridPane.add(numberOfReviews, 1, 0);
-                gridPane.add(minimumNights, 1, 1);
+                gridPane.add(minimumNights, 1, 0);
+                gridPane.add(numberOfReviews, 1, 1);
                 gridPane.setAlignment(Pos.TOP_LEFT);
-                gridPane.getColumnConstraints().add(new ColumnConstraints(150));
+                gridPane.getColumnConstraints().add(new ColumnConstraints(160));
                 gridPane.getColumnConstraints().add(new ColumnConstraints(150));
                 
                 // spacer label to offset the gridpane from the left
                 Label spacerLabel = new Label();
-                spacerLabel.setMinWidth(40);
-                spacerLabel.setMaxWidth(40);
+                spacerLabel.setMinWidth(35);
+                spacerLabel.setMaxWidth(35);
             
             // wrap all the details of a property in an HBox
             HBox contentWrapper = new HBox(spacerLabel, gridPane, viewBtnWrapper);
