@@ -1,4 +1,3 @@
-//TODO: sort out imports
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,9 +10,14 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.List;
-
+import java.lang.NullPointerException;
 /**
- * TODO: comment here
+ * This class handles the database for the app. It loads the .csv file
+ * and maps the data in a HashMap, using boroughs as keys. That helps with 
+ * a lot of algorithms, as they can be executed faster if they are narrowed down
+ * to boroughs and also helps with the borough buttons in the BoroughsPane
+ * 
+ * The class itself extends HashMap
  * 
  * @author Alexis Dumon, Federico Barbero, Martin Todorov and Maximilian Ghazanfar
  * @version 1.0
@@ -28,30 +32,28 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     private ArrayList<String> geoOrderedBoroughs;
     // the favorites list
     private ArrayList<AirbnbListing> favorites;
+    // the header names of all columns
+    private String [] firstLine;
     
     /**
      * Construct the map by loading the data in it
      */
     public AirbnbDataMap()
     {
+        // order boroughs geographically (read top to bottom, left to right)
+        // from the provided png imate
         geographicallyOrderBoroughs();
+
+        // read the data from the .csv file and map it
+        // using neighbourhood as keys
         load();
+
+        // init an arraylist to store favorite properties
         favorites = new ArrayList<AirbnbListing>();
-        //hardCodeFavorites(); // TODO: not hardcode
-    }
-    
-    private void hardCodeFavorites()
-    {
-        favorites = get("Havering");
-    }
-    
-    public ArrayList<AirbnbListing> getFavoriteProperties()
-    {
-        return favorites;
     }
     
     /**
-     * 
+     * Cheapest property across all
      * @return the minimum price found in data
      */
     public int getMinPrice()
@@ -60,7 +62,7 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     }
     
     /**
-     * 
+     * Most exepnsive property across all
      * @return the maximum price found in data
      */
     public int getMaxPrice()
@@ -69,7 +71,7 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     }
     
     /**
-     * 
+     * Invoked when the user selects a new borough
      * @param newBorough the name of the newly selected neighbourhood
      */
     public void setCurrentBorough(String newBorough)
@@ -78,7 +80,8 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     }
     
     /**
-     * 
+     * Accessor method for the currently selected borough
+     * by the user
      * @return the name of the selected neighbourhood
      */
     public String getCurrentBorough()
@@ -87,7 +90,9 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     }
     
     /**
-     * 
+     * This method implements no additional functionality,
+     * however it helps for readability (it is the same as calling
+     * the keySet() method on an object of this class).
      * @return a set of all boroughs provided in the data
      */
     public Set<String> getDistinctBoroughsSet()
@@ -96,6 +101,7 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     }
     
     /**
+     * A method to get an array list of all properties in a borough
      * @param name the name of the borough to fetch data from
      * @return an ArrayList of listings of properties
      */
@@ -105,6 +111,7 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     }
     
     /**
+     * Returns the defined geographic order of boroughs
      * @return the geographic order of boroughs
      */
     public ArrayList<String> getGeoOrderedBoroughs()
@@ -113,6 +120,8 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     }
     
     /**
+     * Return all properties within a specific price range, also 
+     * narrowing it down to a borough for faster execution
      * @param key the borough to get properties from
      * @param min the minimum price of properties
      * @param max the maximum price of properties
@@ -122,6 +131,7 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     {
         ArrayList<AirbnbListing> result = new ArrayList<AirbnbListing>();
         
+        // iterate...
         for(AirbnbListing listing : get(key))  {
             if(listing.getPrice() <= max && listing.getPrice() >= min) {
                 result.add(listing);
@@ -131,6 +141,7 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     }
     
     /**
+     * Return the number of properties within a specific price range
      * @param min the minimum price
      * @param max the maximum price
      * @return the number of properties within a price range
@@ -139,6 +150,7 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     {
         int count = 0;
         
+        // iterate...
         for(String key : keySet())  {
             for(AirbnbListing listing : get(key)) { 
                 if(listing.getPrice() <= max && listing.getPrice() >= min) {
@@ -148,18 +160,91 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
         }
         return count;
     }
-    
-    public void setFavorite(String neighbourhood, String id)
+
+    /**
+     * Get a property based on a provided id
+     * @param id provided id
+     * @return the property with a matching id, null if none such exists
+     */
+    public AirbnbListing getPropertyById(String id)
     {
-        for(AirbnbListing listing : get(neighbourhood)) {
-            if(id.equals(listing.getId())) {
-                listing.setFavorite();
-                favorites.add(listing);
-                return;
+        // iterate...
+        for(String key : keySet()) {
+            for(AirbnbListing listing : get(key)) {
+                if(listing.getId().equals(id)) {
+                    return listing;
+                }
             }
+        }
+        
+        return null;
+    }
+
+    /**
+     * Get the model of the .csv file. In other words
+     * the first line of the csv file, which included column headers
+     * @return String array with all column headers from loaded csv
+     */
+    public String[] getFirstLineModel()
+    {
+        return firstLine;
+    }
+
+
+    /**
+     * Sets a favorite property. Also specifies borough for faster
+     * execution. No need to look through all properties, just the ones
+     * in the given broough and look for its unique id
+     * 
+     * Throws NullPointerException if the provided details are invalid.
+     * 
+     * @param neighbourhood the borough the property should be located in
+     * @param id the unique id of the property that is to be matched
+     * 
+     */
+    public void setFavorite(String neighbourhood, String id) throws NullPointerException
+    {
+        // iterate...
+        for(AirbnbListing listing : get(neighbourhood)) {
+            // possibly throw exception
+            if(listing == null) throw new NullPointerException(id);
+            if(id.equals(listing.getId())) {
+                if(!listing.isFavorite()) {
+                    listing.setFavorite();
+                    favorites.add(listing);
+                    return;
+                }
+            }   
         }
     }
     
+    /**
+     * Clears the favorites private array list and unmarks all listings
+     * as 'favorite'
+     */
+    public void resetFavorites()
+    {
+        // the method only needs to execute if there are any free properties
+        if(!favorites.isEmpty()) {
+            favorites.clear();
+            // iterate...
+            for(String key : keySet())  {
+                for(AirbnbListing listing : get(key)) { 
+                    listing.removeFavorite();
+                }
+            }
+        }
+    }
+
+    /**
+     * Get access to all favorite properties
+     * @return an array list including only properties that are marked as favorite
+     */
+    public ArrayList<AirbnbListing> getFavoriteProperties()
+    {
+        return favorites;
+    }
+
     /**
      * Set the geographic order of the boroughs
      * Used when creating the buttons in the BoroughsPane
@@ -201,32 +286,19 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
         geoOrderedBoroughs.add("Croydon");
         geoOrderedBoroughs.add("Bromley");
     }
-    
-    public AirbnbListing getPropertyById(String id)
-    {
-        for(String key : keySet()) {
-            for(AirbnbListing listing : get(key)) {
-                if(listing.getId().equals(id)) {
-                    return listing;
-                }
-            }
-        }
-        
-        return null;
-    }
+
     /** 
      * Load the CSV file and iterate through every row, storing data in 
      * an AirbnbListing object and map boroughs to properties with a HashMap
      * (this class extends HashMap)
      */
     private void load() {
-        System.out.print("Begin loading Airbnb london dataset...");
         try {
             URL url = getClass().getResource("airbnb-london.csv");
             CSVReader reader = new CSVReader(new FileReader(new File(url.toURI()).getAbsolutePath()));
             String [] line;
-            //skip the first row (column headers)
-            reader.readNext();
+            // save the header columns for future reference
+            firstLine = reader.readNext();
             while ((line = reader.readNext()) != null) {
 
                 String id = line[0];
@@ -270,12 +342,11 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
                     put(neighbourhood, new ArrayList<AirbnbListing>(Arrays.asList(listing)));
                 }
             }
-
+            reader.close();
         } catch(IOException | URISyntaxException e){
             System.out.println("Failure! Something went wrong");
             e.printStackTrace();
         }
-        System.out.println("Success! Number of loaded records: " + values().stream().mapToInt(List::size).sum());
     }
 
     /**
