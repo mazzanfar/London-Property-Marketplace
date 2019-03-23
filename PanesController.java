@@ -39,7 +39,6 @@ public class PanesController
         panes.add(new WelcomePane());
         panes.add(new BoroughsPane(data));
         panes.add(new StatisticsPane(data));
-        panes.add(new MapPane(data));
         panes.add(new FavoritesPane(data));
         
         // only the welcome pane will be available at the start
