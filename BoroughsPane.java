@@ -241,7 +241,7 @@ public class BoroughsPane extends ExtendedBorderPane
                     // to center them based on the window
                     boroughButtons.get(btnIndex).setLayoutX(j*37 + 80);
                     // offset Y by enough to be a beehive pattern
-                    boroughButtons.get(btnIndex).setLayoutY(i*59);
+                    boroughButtons.get(btnIndex).setLayoutY(i*58);
                     btnIndex ++;
                 }
             }
