@@ -14,7 +14,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import java.util.ArrayList; 
-import com.jfoenix.controls.JFXButton;
 
 /**
  * This class represents the pane that shows a geographically-accurate representation
@@ -205,7 +204,6 @@ public class BoroughsPane extends ExtendedBorderPane
 
         // put the scene in the new window
         popUpWin.setScene(newScene);
-        
         // set title and show
         popUpWin.setTitle(POPUP_TITLE_PREFIX + btn.getBoroughOfButton());
         popUpWin.show();
