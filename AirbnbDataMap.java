@@ -9,6 +9,7 @@ import com.opencsv.CSVReader;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.List;
 import java.lang.NullPointerException;
 /**
@@ -243,6 +244,25 @@ public class AirbnbDataMap extends HashMap<String, ArrayList<AirbnbListing>>
     public ArrayList<AirbnbListing> getFavoriteProperties()
     {
         return favorites;
+    }
+    
+    /**
+     * Look for newly added favorites and add them to the 
+     * array list. Clear before to avoid duplicate entries
+     */
+    public void lookForFavorites()
+    {
+        // clear to avoid duplicate entries
+        favorites.clear();
+        
+        // iterate..
+        for(String key : keySet()) {
+            for(AirbnbListing listing : get(key)) {
+                if(listing.isFavorite()) {
+                    favorites.add(listing);
+                }
+            }
+        }
     }
 
     /**
