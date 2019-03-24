@@ -222,11 +222,13 @@ public class PropertyLister extends VBox
                 Pane newWinRoot = propList.getView();
                 
                 // add the details in a new scene
-                Scene newScene = new Scene(newWinRoot, 350, 350);
+                Scene newScene = new Scene(newWinRoot);
                 newScene.getStylesheets().add("propertyDetailsStyle.css");
         
                 // add the scene to the popup stage
                 detailsPopUpWin.setScene(newScene);
+                detailsPopUpWin.setMinWidth(600);
+                detailsPopUpWin.setMinHeight(528);
                 
                 // set title and show
                 detailsPopUpWin.setTitle(DETAILS_POPUP_PREFIX + id);
