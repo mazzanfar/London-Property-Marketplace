@@ -132,7 +132,7 @@ public class FavoritesPane extends ExtendedBorderPane
             // init the label that guides the user, indicating
             // all of the functionality supported
             guideLabel = new Label(GUIDE_DEFAULT_PREFIX);
-            guideLabel.setMaxWidth(450);
+            guideLabel.setMaxWidth(500);
             guideLabel.setWrapText(true);
             guideLabel.setTextAlignment(TextAlignment.CENTER);
             
@@ -150,6 +150,7 @@ public class FavoritesPane extends ExtendedBorderPane
         scrollWrapper.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollWrapper.setMaxWidth(600);
         scrollWrapper.setPrefWidth(600);
+        scrollWrapper.setPannable(true);
 
             // a spacer label to provide space between the footerlabel
             // of the root border pane and this border pane
@@ -182,6 +183,8 @@ public class FavoritesPane extends ExtendedBorderPane
      */
     private void refresh(ActionEvent e)
     {
+        // fetch any possible newly marked as favorite properties
+        data.lookForFavorites();
         refresh();
     }
 
@@ -218,6 +221,7 @@ public class FavoritesPane extends ExtendedBorderPane
                 // all favorites have been deleted, thus we need to remove
                 // them from the view
                 wrapper.getChildren().remove(2);
+                guideLabel.setText(GUIDE_DEFAULT_PREFIX);
             }
             // Alert the user that there are no favorite properties found
             // as 'favorite'
