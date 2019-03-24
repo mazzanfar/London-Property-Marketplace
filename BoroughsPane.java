@@ -200,7 +200,7 @@ public class BoroughsPane extends ExtendedBorderPane
         // put the list in a new scene
         Scene newScene = new Scene(newWinRoot);
         newScene.getStylesheets().add("propertyListStyle.css");
-        newScene.getStylesheets().add("mainStyle.css");
+        // newScene.getStylesheets().add("mainStyle.css");
 
         // put the scene in the new window
         popUpWin.setScene(newScene);
