@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayList;
@@ -28,77 +30,86 @@ public class PropertyListWindow
     static {
         VIEWBTN_TOOLTIP = "View property ";
     }
+    
     private BorderPane root;
     private ArrayList<AirbnbListing> currentListing;
     private int sizeOfListing;
     
+    // the number of currently loaded properties
+    private int currentLoad;
     
     private ArrayList<AirbnbListing> sortByReviewNumber = new ArrayList<>();
     private ArrayList<AirbnbListing> sortAlphabetically = new ArrayList<>();
     private ArrayList<AirbnbListing> sortAscendingPrice = new ArrayList<>();
     private ArrayList<AirbnbListing> sortDescendingPrice = new ArrayList<>();
-    
+
     private int numberAvailable;
-    private String displayChoice = "";
-    ArrayList<StackPane> ScrollPanes = new ArrayList<>();
+    private String displayChoice;
     private ScrollPane verticalScroll;
+    private Button showMoreButton;
     private AirbnbListing[] inArray;
     private Stage detailsPopUpWin;
-    
+    private VBox scrollVBox; //extends a VBox
+
+    private int recordTest;
     /**
      * Constructor for objects of class PropertyListWindow
      */
     public PropertyListWindow(ArrayList<AirbnbListing> currentListing)
     {
-        
         this.currentListing = currentListing;
         sizeOfListing = currentListing.size();
-        
-        inArray = currentListing.toArray(new AirbnbListing[sizeOfListing]);
-        //middle of borderPane
-        VBox scrollVBox = new VBox();
 
-        displayList(currentListing); 
- 
-        //place all the properties (without any preferences) inside the scrollVBox.
-        for (StackPane panes: ScrollPanes)
-        {
-            scrollVBox.getChildren().add(panes);
-        }
+        numberAvailable = 0;
+        //displayChoice = "";
+
+        //middle of borderPane
+        scrollVBox = new PropertyLister(currentListing);
+        scrollVBox.getStyleClass().add("scrollVBox");
+        //scrollVBox.getChildren().add(showMoreButton = new Button());
         verticalScroll = new ScrollPane(scrollVBox);
+        scrollVBox.setAlignment(Pos.CENTER);
+        verticalScroll.getStyleClass().add("verticalScroll");
+        //disp();
 
         //TOP of borderpane
-        // Vbox which contains a text label which shows the name and number of properties
-        //in this borough, then there is an HBox containing ways to refine the search
-        //even more ie. (number of rooms, minimum nights, arrange by price...)
-        //Label label = new Label(data.getCurrentBorough() + ": " + getNumberAvailable());
-
+        Label sort = new Label("Sort: ");
+        sort.getStyleClass().add("sortLabel");
         ChoiceBox sortBy = new ChoiceBox();
         sortBy.getItems().addAll("by reviews", "lowest to highest price", "highest to lowest price",
-        "alphabetically");
+            "alphabetically");
+        sortBy.getStyleClass().add("ChoiceBox");
+        HBox top = new HBox(sort, sortBy);
+        //action event handler for the choicebox
+        sortBy.getSelectionModel().selectedItemProperty()
+        .addListener((e, oldValue, newValue) -> updateDisplay((String) newValue));
+        //displayList(currentListing);
+        
 
-        //action listener to choiceBox
-        sortBy.getSelectionModel().selectedItemProperty().addListener
-            ((v, oldValue, newValue) -> displayChoice = (String) newValue);
-        displayList(howToDisplay(displayChoice));
-        
-        HBox refiningTools = new HBox(sortBy);
-        VBox topVBox = new VBox();
-        topVBox.getChildren().addAll( refiningTools);
-        
         //right of borderPane NOTHING
         //BOTTOM:
-        Label footerLabel = new Label("copyright text info bla bla");
-        footerLabel.setId("footerLabel");
-        
+        Label footerLabel = new Label(getNumberAvailable() + " properties available"  );
+        footerLabel.getStyleClass().add("footerLabel");
         //left of borderpane NOTHING
         //creates the 4 sorted property lists
+        inArray = currentListing.toArray(new AirbnbListing[sizeOfListing]);
         sortByReviewNumber();
         sortAlphabetically();
         sortByLowestToHighest();
         sortByHighestToLowest();
+
+        root = new BorderPane();
+
+        root.setCenter(verticalScroll);
+        root.setBottom(footerLabel);
+
         
-        root = new BorderPane(verticalScroll, topVBox, null, footerLabel, null);
+        BorderPane.setAlignment(verticalScroll, Pos.CENTER);
+        verticalScroll.setFitToWidth(true);
+        root.setTop(top);
+        root.getStyleClass().add("rootPane");
+        root.setPrefHeight(500);
+        root.setPrefWidth(600);
         detailsPopUpWin = new Stage();
     }
 
@@ -110,53 +121,22 @@ public class PropertyListWindow
         return root;
     }
     
-    /**
-     * this is what creates all the panes and allows the properties to be displayed
-     */
-    private void displayList(ArrayList<AirbnbListing> list)
-    {
-        //for (AirbnbListing listing : howToDisplay()) {
-        
-        for (AirbnbListing listing : howToDisplay(displayChoice)){
-                
-                Button but = new Button(listing.getName());
-                but.setTooltip(new Tooltip(VIEWBTN_TOOLTIP + listing.getId()));
-                but.setOnAction(this::buttonClicked);
-                
-                Label hostName = new Label(listing.getHost_name());
-                Label propertyPrice = new Label("Price: " + listing.getPrice());
-                Label numberOfReviews = new Label("Number of reviews: " + listing.getNumberOfReviews());
-                Label minimumNights = new Label("Minimum number of nights: " + listing.getMinimumNights());
-                
-                GridPane infoView = new GridPane();
-                
-                //infoView.getStyleClass().add("infoView");
-                infoView.add(hostName, 0, 0);
-                infoView.add(propertyPrice, 0, 1);
-                infoView.add(numberOfReviews, 1, 0);
-                infoView.add(minimumNights, 1, 1);
-                infoView.setId("infoView"); //for styling
-                
-                VBox verticalArrange = new VBox(but, infoView);
-                StackPane propertyInfo = new StackPane(verticalArrange);
-
-                ScrollPanes.add(propertyInfo);
-                numberAvailable++;
-                //this will be made nicer later
-           
-        }
+    private void updateDisplay(String displayChoice)
+    {     
+        scrollVBox.getChildren().clear();
+        scrollVBox.getChildren().add(new PropertyLister(howToDisplay(displayChoice)));
     }
-    
+
     /**
      * sorts the list of properties by number of reviews
      */
     private void sortByReviewNumber()
     {
         AirbnbListing temp = null;
-        
+
         for (int i = 0; i < sizeOfListing; i++) {
             for(int j = i+1; j < sizeOfListing-1; j++) {
-                if (inArray[i].getNumberOfReviews() > inArray[j].getNumberOfReviews()) 
+                if (inArray[i].getNumberOfReviews() < inArray[j].getNumberOfReviews()) 
                 {
                     temp = inArray[i];
                     inArray[i] = inArray[j];
@@ -164,24 +144,25 @@ public class PropertyListWindow
                 }
             }
         }
-        
+
         //transform the sorted array into a sorted arrayList
         for (int i = 0; i < inArray.length; i++) {
             sortByReviewNumber.add(inArray[i]);
         }
+
     }
-    
+
     /**
      * sorts the list of properties by alphabetical order
      */
     public void sortAlphabetically()
     {
-         List sortedAlphabetically = currentListing.stream()
-                .sorted((a, b) -> a.getName().compareTo(b.getName()))
-                .collect(Collectors.toList());
-         sortAlphabetically.addAll(sortedAlphabetically);
+        List sortedAlphabetically = currentListing.stream()
+            .sorted((a, b) -> a.getName().compareTo(b.getName()))
+            .collect(Collectors.toList());
+        sortAlphabetically.addAll(sortedAlphabetically);
     }
-    
+
     /**
      * sorts the list of properties by ascending price
      */
@@ -199,20 +180,19 @@ public class PropertyListWindow
                 }
             }
         }
-        
+
         //transform the sorted array into a sorted arrayList
         for (int i = 0; i < inArray.length; i++) {
             sortAscendingPrice.add(inArray[i]);
         }
     }
-    
+
     /**
      * sorts the list of properties by descending price
      */
     private void sortByHighestToLowest()
     {
         AirbnbListing temp = null;
-
         for (int i = 0; i < sizeOfListing; i++) {
             for(int j = i+1; j < sizeOfListing-1; j++) {
                 if (inArray[i].getPrice() < inArray[j].getPrice()) 
@@ -223,7 +203,7 @@ public class PropertyListWindow
                 }
             }
         }
-        
+
         //transform the sorted array into a sorted arrayList
         for (int i = 0; i < inArray.length; i++) {
             sortDescendingPrice.add(inArray[i]);
@@ -231,23 +211,18 @@ public class PropertyListWindow
     }
     
     /**
-     * registers and acts accordingly when a button is clicked in the choicebox
+     * returns the total number of properties available inside a particular borough
+     * @return numberAvailable
      */
-    private void choiceBoxListener(ChoiceBox sortBy)
-    {
-        
-        sortBy.getSelectionModel().selectedItemProperty().addListener
-            ((v, oldValue, newValue) -> displayChoice = (String) newValue);
-        displayList(howToDisplay(displayChoice));
-    }
-    
     private int getNumberAvailable()
     {
-        return numberAvailable;
+        return numberAvailable = currentListing.size();
     }
-    
+
     /**
      * returns the an ordered arraylist depending on how it should be ordered.
+     * @return whichever ordered arraylist of AirbnbListings
+     * @param
      */
     private ArrayList<AirbnbListing> howToDisplay(String whichOrder)
     {   
@@ -263,29 +238,23 @@ public class PropertyListWindow
             return currentListing;
         }
     }
-    
-    private void setCurrentProperty()
-    {
-        
-    }
-    
+
     private void buttonClicked(ActionEvent e)
     {
         Button btn = (Button) e.getSource();
-        
-        String id = btn.getTooltip().getText().substring(VIEWBTN_TOOLTIP.length(), btn.getTooltip().getText().length()) ;
-        System.out.println(id);
-        
+
+        String id = btn.getTooltip().getText().substring(VIEWBTN_TOOLTIP.length(), btn.getTooltip().getText().length());
+
         for(AirbnbListing property: currentListing) {
             if(property.getId().equals(id)) {
                 PropertyDetailsWindow propDetails = new PropertyDetailsWindow(property);
                 Pane newWinRoot = propDetails.getView();
-                
+
                 Scene newScene = new Scene(newWinRoot, 350, 350);
                 newScene.getStylesheets().add("propertyDetailsStyle.css");
-                
+
                 detailsPopUpWin.setScene(newScene);
-        
+
                 detailsPopUpWin.setTitle("Showing details for property id: " + id);
                 detailsPopUpWin.show();
                 return;

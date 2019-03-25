@@ -1,5 +1,86 @@
-
-
-.testLabel {
-    -fx-font-size: 50pt;
+@font-face {
+    font-family: Roboto-Bold;
+    src: url("./+libs/Roboto-Bold.ttf");
 }
+
+.rootPane {
+    -fx-background-color: #2A2E37;
+    -fx-font-family: Roboto;
+    -fx-text-fill: #fff;
+}
+
+.propertyWrapper {
+    -fx-background-color: #ffa5ad;
+    -fx-background-radius: 50;
+    -fx-pref-height: 120;
+    -fx-pref-width: 500;
+    -fx-hgap: 20;
+    -fx-vgap: 10;
+}
+
+.viewDetails{
+    -fx-font-family: Roboto-Bold;
+    -fx-text-fill: #fff;
+    -fx-font-size: 12;
+    -fx-background-color: #FF5A5F;
+    -fx-pref-height: 40;
+    -fx-pref-width: 100;
+}
+
+.viewDetails:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, #fff, 3, 0, 0, 0);
+}
+
+.scrollVBox {
+    -fx-background-color: #2A2E37;
+}
+
+.moreBtn {
+    -fx-font-family: Roboto-Bold;
+    -fx-text-fill: #fff;
+    -fx-font-size: 12;
+    -fx-background-color: #FF5A5F;
+    -fx-pref-height: 40;
+    -fx-pref-width: 100;
+}
+
+.moreBtn:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, #fff, 3, 0, 0, 0);
+}
+
+.infoView {
+    -fx-background-color: #ffcee6;
+    -fx-background-insets: 0.0 10.0 0.0 10.0;
+    -fx-text-size: 10px;
+    -fx-text-fill: #d1c8cc;
+    -fx-padding: 30;
+    -fx-hgap: 20;
+    -fx-vgap: 20;
+}
+
+.headerLabelProperty  {
+    -fx-font-size: 16px;
+    -fx-background-color: #ffa5ad;
+    -fx-background-radius: 0;
+}
+
+.ChoiceBox {
+  -fx-background-color: #edcbd8;
+  -fx-mark-color: black;
+}
+
+.footerLabel {
+     -fx-text-fill: white;
+}
+
+.sortLabel {
+    -fx-text-fill: white;
+    -fx-text-size: 20px;
+}
+
+.countLabel {
+    -fx-text-fill: white;
+}
+
