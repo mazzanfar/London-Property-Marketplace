@@ -1,5 +1,3 @@
-//TODO: sort imports
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -7,11 +5,6 @@ import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import org.controlsfx.control.RangeSlider;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import java.util.Queue;
-import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -42,16 +35,14 @@ public class PropertyListWindow
     private ArrayList<AirbnbListing> sortAlphabetically = new ArrayList<>();
     private ArrayList<AirbnbListing> sortAscendingPrice = new ArrayList<>();
     private ArrayList<AirbnbListing> sortDescendingPrice = new ArrayList<>();
-
-    private int numberAvailable;
+    
     private String displayChoice;
     private ScrollPane verticalScroll;
     private Button showMoreButton;
     private AirbnbListing[] inArray;
     private Stage detailsPopUpWin;
-    private VBox scrollVBox; //extends a VBox
-
-    private int recordTest;
+    private PropertyLister scrollVBox; //extends a VBox
+    
     /**
      * Constructor for objects of class PropertyListWindow
      */
@@ -59,9 +50,6 @@ public class PropertyListWindow
     {
         this.currentListing = currentListing;
         sizeOfListing = currentListing.size();
-
-        numberAvailable = 0;
-        //displayChoice = "";
 
         //middle of borderPane
         scrollVBox = new PropertyLister(currentListing);
@@ -80,17 +68,15 @@ public class PropertyListWindow
             "alphabetically");
         sortBy.getStyleClass().add("ChoiceBox");
         HBox top = new HBox(sort, sortBy);
-        //action event handler for the choicebox
-        sortBy.getSelectionModel().selectedItemProperty()
-        .addListener((e, oldValue, newValue) -> updateDisplay((String) newValue));
-        //displayList(currentListing);
         
-
-        //right of borderPane NOTHING
+        //action event handler for the choicebox
+        sortBy.getSelectionModel().selectedItemProperty().addListener(
+            (e, oldValue, newValue) -> updateDisplay((String) newValue));
+        
         //BOTTOM:
-        Label footerLabel = new Label(getNumberAvailable() + " properties available"  );
+        Label footerLabel = new Label(getCurrentLoad() + " properties available"  );
         footerLabel.getStyleClass().add("footerLabel");
-        //left of borderpane NOTHING
+        
         //creates the 4 sorted property lists
         inArray = currentListing.toArray(new AirbnbListing[sizeOfListing]);
         sortByReviewNumber();
@@ -115,12 +101,22 @@ public class PropertyListWindow
 
     /**
      * method which displays the view
+     * @return the root of the scene which is a BorderPane
      */
     public BorderPane getView()
     {
         return root;
     }
     
+    private int getCurrentLoad()
+    {
+        return currentLoad = currentListing.size();
+    }
+    
+    /**
+     * updates the display by clearing the children of the scrollVBox and then adding them again 
+     * using a differently ordered ArrayList as the parameter to the PropertyLister object
+     */
     private void updateDisplay(String displayChoice)
     {     
         scrollVBox.getChildren().clear();
@@ -144,14 +140,12 @@ public class PropertyListWindow
                 }
             }
         }
-
         //transform the sorted array into a sorted arrayList
         for (int i = 0; i < inArray.length; i++) {
             sortByReviewNumber.add(inArray[i]);
         }
-
     }
-
+    
     /**
      * sorts the list of properties by alphabetical order
      */
@@ -180,7 +174,6 @@ public class PropertyListWindow
                 }
             }
         }
-
         //transform the sorted array into a sorted arrayList
         for (int i = 0; i < inArray.length; i++) {
             sortAscendingPrice.add(inArray[i]);
@@ -203,26 +196,16 @@ public class PropertyListWindow
                 }
             }
         }
-
         //transform the sorted array into a sorted arrayList
         for (int i = 0; i < inArray.length; i++) {
             sortDescendingPrice.add(inArray[i]);
         }
     }
-    
-    /**
-     * returns the total number of properties available inside a particular borough
-     * @return numberAvailable
-     */
-    private int getNumberAvailable()
-    {
-        return numberAvailable = currentListing.size();
-    }
 
     /**
      * returns the an ordered arraylist depending on how it should be ordered.
      * @return whichever ordered arraylist of AirbnbListings
-     * @param
+     * @param whichOrder the order by which the returned arraylist should follow
      */
     private ArrayList<AirbnbListing> howToDisplay(String whichOrder)
     {   
@@ -239,6 +222,10 @@ public class PropertyListWindow
         }
     }
 
+    /**
+     * handles the action event when the view details button is clicked
+     * it will open a new window containing more information for that specific property
+     */
     private void buttonClicked(ActionEvent e)
     {
         Button btn = (Button) e.getSource();
