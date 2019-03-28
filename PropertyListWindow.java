@@ -12,8 +12,9 @@ import java.util.stream.Collectors;
 import javafx.scene.control.Tooltip;
 
 /**
- * Write a description of class PropertyListWindow here.
- *
+ * This class is to create the Property list window, this window shows in a styled
+ * list all the properties inside a specific borough.
+ * The list of properties can then be displayed in four different orders.
  * @author Alexis Dumon, Federico Barbero, Martin Todorov and Maximilian Ghazanfar
  * @version 1.0
  */
@@ -45,6 +46,8 @@ public class PropertyListWindow
     
     /**
      * Constructor for objects of class PropertyListWindow
+     * In it the general structure of the window is created.
+     * 
      */
     public PropertyListWindow(ArrayList<AirbnbListing> currentListing)
     {
@@ -108,6 +111,11 @@ public class PropertyListWindow
         return root;
     }
     
+    /**
+     * gets the number of properties inside the selected borough
+     * @return the current load which is equalled to the size of the currentListing
+     * arrayList
+     */
     private int getCurrentLoad()
     {
         return currentLoad = currentListing.size();
@@ -237,7 +245,7 @@ public class PropertyListWindow
                 PropertyDetailsWindow propDetails = new PropertyDetailsWindow(property);
                 Pane newWinRoot = propDetails.getView();
 
-                Scene newScene = new Scene(newWinRoot, 350, 350);
+                Scene newScene = new Scene(newWinRoot, 1000, 200);
                 newScene.getStylesheets().add("propertyDetailsStyle.css");
 
                 detailsPopUpWin.setScene(newScene);
