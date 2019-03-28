@@ -117,6 +117,7 @@ public class StatisticsPane extends ExtendedBorderPane {
         label.getStyleClass().add("statisticslabel");
         label.setMinWidth(PANE_WIDTH / 2);
         label.setMinHeight(PANE_HEIGHT / 2);
+        label.setWrapText(true);
         labels.add(label);
         return label;
     }
@@ -142,12 +143,13 @@ public class StatisticsPane extends ExtendedBorderPane {
         Label welcomeLabel1 = new Label(loadingString());
         welcomeLabel1.setWrapText(true);
         welcomeLabel1.getStyleClass().add("welcomeLabel1");
+        welcomeLabel1.setWrapText(true);
 
         Separator separator = new Separator();
 
         Label welcomeLabel2 = new Label("Loading, please wait.");
         welcomeLabel2.getStyleClass().add("welcomeLabel2");
-
+        welcomeLabel2.setWrapText(true);
         // put labels in a vertical box, center and set dimensions
         VBox welcomeWrap = new VBox(welcomeLabel1, separator, welcomeLabel2);
         welcomeWrap.setMaxWidth(400);
