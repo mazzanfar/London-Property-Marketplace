@@ -278,3 +278,10 @@
 .scroll-pane .corner {
     -fx-background-insets: 0;
 }
+
+.statisticslabel {
+    -fx-text-fill: #fff;
+    -fx-text-alignment: center;
+    -fx-font-size: 12pt; 
+    -fx-font-weight: bold;
+} 
