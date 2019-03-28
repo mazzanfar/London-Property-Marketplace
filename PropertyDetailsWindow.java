@@ -1,152 +1,238 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.geometry.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import com.jfoenix.controls.JFXButton;
-import java.awt.Desktop;
-import java.net.URI;
+//TODO: sort imports
+import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.io.FileReader;
+import javafx.scene.control.ScrollPane;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import com.jfoenix.controls.JFXButton;
+import java.util.ArrayList;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.text.TextAlignment;
+import com.sun.javafx.application.HostServicesDelegate;
+import java.io.IOException;
+import java.awt.Desktop;
+import java.net.URI;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+
 
 /**
- * This class shows the details of each property in an aesthetic way.
- * There are two buttons, one to mark the property as favorite or too unmark it,
- * the other to see the property i=on a map.
+ * TODO: implement
  * 
  * @author Alexis Dumon, Federico Barbero, Martin Todorov and Maximilian Ghazanfar
  * @version 1.0
  */
 public class PropertyDetailsWindow
 {
+    private static final String HOST_NAME_PREFIX, PRICE_PREFIX, MINIMUM_NIGHTS_PREFIX,
+                                REVIEWS_PREFIX, MAPBTN_PREFIX, HOST_ID_PREFIX, ROOM_TYPE_PREFIX,
+                                AVAILABILITY_PREFIX, NUMBER_OF_REVIEWS_PREFIX, LAST_REVIEW_PREFIX,
+                                TOGGLE_PREFIX, SINGLE_NIGHT, PLURAL_NIGHT;
+    static {
+        HOST_NAME_PREFIX =  "Host name:";
+        PRICE_PREFIX = "Price:";
+        MINIMUM_NIGHTS_PREFIX = "Minimum stay:";
+        REVIEWS_PREFIX = "Number of reviews:";
+        HOST_ID_PREFIX = "Host ID:";
+        ROOM_TYPE_PREFIX = "Room type:";
+        AVAILABILITY_PREFIX = "Availability 365:";
+        NUMBER_OF_REVIEWS_PREFIX = "Number of reviews:";
+        LAST_REVIEW_PREFIX = "Last review:";
+        MAPBTN_PREFIX = "View on Map";
+        TOGGLE_PREFIX = "Toggle this property favorite";
+        SINGLE_NIGHT = " night";
+        PLURAL_NIGHT = " nights";
+    }
+    // instance variables - replace the example below with your own
     private AirbnbListing property;
-    private HBox root;
+    private BorderPane root;
     /**
      * Constructor for objects of class PropertyDetailsWindow
-     * Creates all the labels, the buttons and the VBox, the Hbox and the GridPane for the layout
      */
     public PropertyDetailsWindow(AirbnbListing property)
     {
         this.property = property;
-        
-        // All the Labels.
-        Label nameLabel = new Label("Name : ");
-        Label host_idLabel = new Label ("Host id : ");
-        Label host_nameLabel = new Label ("Host name : ");
-        Label neighbourhoudLabel = new Label ("Neighbourhood : "); 
-        Label room_typeLabel = new Label ("Room Type : ");
-        Label priceLabel = new Label ("Price : ");
-        Label minimumNightsLabel = new Label ("Minimum nights : ");
-        Label numberOfReviewsLabel = new Label ("Number of Reviews : ");
-        Label lastReviewLabel = new Label ("Last review : ");
-        Label reviewsPerMonthLabel = new Label ("Review per month : ");
-        Label calculatedHostListingsCountLabel = new Label ("Number of listings frome this host : "); 
-        Label availability365Label = new Label ("Availability : ");
-        Label getIdLabel = new Label (property.getId());
-        Label getNameLabel = new Label(property.getName());
-        Label getHost_idLabel = new Label (property.getHost_id());
-        Label getHost_nameLabel = new Label (property.getHost_name());
-        Label getNeighbourhoudLabel = new Label (property.getNeighbourhood()); 
-        Label getRoom_typeLabel = new Label (property.getRoom_type());
-        Label getPriceLabel = new Label (""+property.getPrice());
-        Label getMinimumNightsLabel = new Label (""+property.getMinimumNights());
-        Label getNumberOfReviewsLabel = new Label (""+property.getNumberOfReviews());
-        Label getLastReviewLabel = new Label (property.getLastReview());
-        Label getReviewsPerMonthLabel = new Label (""+property.getReviewsPerMonth());
-        Label getCalculatedHostListingsCountLabel = new Label (""+property.getCalculatedHostListingsCount()); 
-        Label getAvailability365Label = new Label (""+property.getAvailability365());
-        
-        // The button to mark as favorite.
-        ToggleButton favoriteButton = new ToggleButton();
-        favoriteButton.setOnAction(this::toggleFavorite);
-        favoriteButton.getStyleClass().add("favoriteButton");
-        
-        // The GridPane where the informations about the host are listed.
-        GridPane hostInformationGridPane = new GridPane();
-        hostInformationGridPane.getStyleClass().add("hostInformationGridPane");
-        hostInformationGridPane.add(host_idLabel,0,0);
-        hostInformationGridPane.add(getHost_idLabel,1,0);
-        hostInformationGridPane.add(host_nameLabel,0,1);
-        hostInformationGridPane.add(getHost_nameLabel,1,1);
-        hostInformationGridPane.add(calculatedHostListingsCountLabel,0,2);
-        hostInformationGridPane.add(getCalculatedHostListingsCountLabel,1,2);
-        hostInformationGridPane.setMaxHeight(400);
-        
-        // The GridPane where the informations about the reviews are listed.
-        GridPane reviewGridPane = new GridPane();
-        reviewGridPane.getStyleClass().add("reviewGridPane");
-        reviewGridPane.add(numberOfReviewsLabel,0,0);
-        reviewGridPane.add(getNumberOfReviewsLabel,1,0);
-        reviewGridPane.add(reviewsPerMonthLabel,0,1);
-        reviewGridPane.add(getReviewsPerMonthLabel,1,1);
-        reviewGridPane.add(lastReviewLabel,0,2);
-        reviewGridPane.add(getLastReviewLabel,1,2);
-        
-        // The GridPane where the informations about the property are listed.
-        GridPane informationGridPane = new GridPane();
-        informationGridPane.getStyleClass().add("informationGridPane");
-        informationGridPane.add(favoriteButton, 1, 0);
-        informationGridPane.add(nameLabel, 0, 1);
-        informationGridPane.add(getNameLabel, 1, 1);
-        informationGridPane.add(neighbourhoudLabel, 0, 2);
-        informationGridPane.add(getNeighbourhoudLabel, 1, 2);
-        informationGridPane.add(room_typeLabel, 0, 3);
-        informationGridPane.add(getRoom_typeLabel, 1, 3);
-        informationGridPane.add(priceLabel, 0, 4);
-        informationGridPane.add(getPriceLabel, 1, 4);
-        informationGridPane.add(minimumNightsLabel,0, 5);
-        informationGridPane.add(getMinimumNightsLabel, 1, 5);
-        informationGridPane.add(availability365Label, 0, 6);
-        informationGridPane.add(getAvailability365Label, 1, 6);
-        
-        // The button to view the location of the property on the map.
-        Image mapImg = new Image(getClass().getResourceAsStream("/img/map.png"));
-        JFXButton viewOnMapBtn = new JFXButton("View on Map", new ImageView(mapImg));
-        viewOnMapBtn.setOnAction(this::viewOnMap);
-        viewOnMapBtn.getStyleClass().add("mapButton");
-        
-        
-        // The VBox that is on the right which contains the hostInformationGridPane
-        // the reviewGridPane and the viewOnMapBtn.
-        VBox rightHandVbox = new VBox(10);
-        rightHandVbox.getChildren().addAll(hostInformationGridPane,reviewGridPane, viewOnMapBtn);
-        rightHandVbox.setAlignment(Pos.CENTER);
-        
-        // The HBox that contains the informationGridPane and the rightHandVbox.
-        root = new HBox(10);
-        root.getChildren().addAll(informationGridPane, rightHandVbox);
-        root.setAlignment(Pos.CENTER);
+                    Label boroughLabel = new Label(property.getNeighbourhood().substring(0, 4).toUpperCase());
+                    boroughLabel.setAlignment(Pos.CENTER);
+                    boroughLabel.getStyleClass().add("boroughLabel");
+
+                        Label headerLabel = new Label(property.getName());
+                        headerLabel.setAlignment(Pos.CENTER);
+                        headerLabel.setWrapText(true);
+                        headerLabel.getStyleClass().add("headerLabel");
+                     
+                    HBox headerLabelWrap = new HBox(headerLabel);
+                    headerLabelWrap.setAlignment(Pos.CENTER);
+                    headerLabelWrap.getStyleClass().add("headerLabelWrap");
+
+                    ToggleButton favoriteBtn = new ToggleButton();
+                    favoriteBtn.setOnAction(this::toggleFavorite);
+                    favoriteBtn.getStyleClass().add("favoriteBtn");
+                    favoriteBtn.setTooltip(new Tooltip(TOGGLE_PREFIX));
+                    if(property.isFavorite()) {
+                        favoriteBtn.setSelected(true);
+                    }
+                    
+                BorderPane headerWrapper = new BorderPane(headerLabelWrap, null, favoriteBtn, null, boroughLabel);
+                headerWrapper.setMinWidth(510);
+                headerWrapper.setMaxWidth(510);
+
+                            Label hostIDText = new Label(HOST_ID_PREFIX);
+                            hostIDText.setWrapText(true);
+                            hostIDText.getStyleClass().add("bigLabel");
+                            
+                            Label hostID = new Label(property.getHost_id());
+                            hostID.setWrapText(true);
+                            hostID.getStyleClass().add("smallLabel");
+                            
+                        VBox hostIDWrap = new VBox(hostIDText, hostID);
+                        hostIDWrap.setSpacing(2);
+                        hostIDWrap.getStyleClass().add("labelWrap");
+                        
+                            Label hostNameText = new Label(HOST_NAME_PREFIX);
+                            hostNameText.setWrapText(true);
+                            hostNameText.getStyleClass().add("bigLabel");
+                            
+                            Label hostName = new Label(property.getHost_name());
+                            hostName.setWrapText(true);
+                            hostName.getStyleClass().add("smallLabel");
+                            
+                        VBox hostNameWrap = new VBox(hostNameText, hostName);
+                        hostNameWrap.setSpacing(2);
+                        hostNameWrap.getStyleClass().add("labelWrap");
+                        
+                            Label roomTypeText = new Label(ROOM_TYPE_PREFIX);
+                            roomTypeText.setWrapText(true);
+                            roomTypeText.getStyleClass().add("bigLabel");
+                            
+                            Label roomType = new Label(property.getRoom_type());
+                            roomType.setWrapText(true);
+                            roomType.getStyleClass().add("smallLabel");
+                            
+                        VBox roomTypeWrap = new VBox(roomTypeText, roomType);
+                        roomTypeWrap.setSpacing(2);
+                        roomTypeWrap.getStyleClass().add("labelWrap");
+                        
+                            Label availText = new Label(AVAILABILITY_PREFIX);
+                            availText.setWrapText(true);
+                            availText.getStyleClass().add("bigLabel");
+                            
+                            Label avail = new Label(""+ property.getAvailability365());
+                            avail.setWrapText(true);
+                            avail.getStyleClass().add("smallLabel");
+                            
+                        VBox availWrap = new VBox(availText, avail);
+                        availWrap.setSpacing(2);
+                        availWrap.getStyleClass().add("labelWrap");
+
+                            Label priceText = new Label(PRICE_PREFIX);
+                            priceText.setWrapText(true);
+                            priceText.getStyleClass().add("bigLabel");
+                            
+                            Label price = new Label("" + property.getPrice() + "£");
+                            price.setWrapText(true);
+                            price.getStyleClass().add("smallLabel");
+                            
+                        VBox priceWrap = new VBox(priceText, price);
+                        priceWrap.setSpacing(2);
+                        priceWrap.getStyleClass().add("labelWrap");
+                        
+                            Label nightsText = new Label(MINIMUM_NIGHTS_PREFIX);
+                            nightsText.setWrapText(true);
+                            nightsText.getStyleClass().add("bigLabel");
+                            
+                            Label nights = new Label("");
+                            if(property.getMinimumNights() == 1)
+                                nights.setText(property.getMinimumNights() + SINGLE_NIGHT);
+                            else
+                                nights.setText(property.getMinimumNights() + PLURAL_NIGHT);
+                            nights.setWrapText(true);
+                            nights.getStyleClass().add("smallLabel");
+                            
+                        VBox nightsWrap = new VBox(nightsText, nights);
+                        nightsWrap.setSpacing(2);
+                        nightsWrap.getStyleClass().add("labelWrap");
+                        
+                            Label reviewsText = new Label(NUMBER_OF_REVIEWS_PREFIX);
+                            reviewsText.setWrapText(true);
+                            reviewsText.getStyleClass().add("bigLabel");
+                            
+                            Label reviews = new Label("" + property.getNumberOfReviews());
+                            reviews.setWrapText(true);
+                            reviews.getStyleClass().add("smallLabel");
+                            
+                        VBox reviewsWrap = new VBox(reviewsText, reviews);
+                        reviewsWrap.setSpacing(2);
+                        reviewsWrap.getStyleClass().add("labelWrap");
+                        
+                            Label lReviewText = new Label(LAST_REVIEW_PREFIX);
+                            lReviewText.setWrapText(true);
+                            lReviewText.getStyleClass().add("bigLabel");
+                            
+                            Label lReviews = new Label(property.getLastReview());
+                            lReviews.setWrapText(true);
+                            lReviews.getStyleClass().add("smallLabel");
+                            
+                        VBox lReviewWrap = new VBox(lReviewText, lReviews);
+                        lReviewWrap.setSpacing(2);
+                        lReviewWrap.getStyleClass().add("labelWrap");
+                        
+                    // wrap the labels in a gridpane, center, set dimensions
+                    GridPane gridPane = new GridPane();
+                    gridPane.add(hostIDWrap, 0, 0);
+                    gridPane.add(hostNameWrap, 0, 1);
+                    gridPane.add(roomTypeWrap, 0, 2);
+                    gridPane.add(availWrap, 0, 3);
+                    gridPane.add(priceWrap, 1, 0);
+                    gridPane.add(nightsWrap, 1, 1);
+                    gridPane.add(reviewsWrap, 1, 2);
+                    gridPane.add(lReviewWrap, 1, 3);
+                    gridPane.setAlignment(Pos.TOP_CENTER);
+                    gridPane.getColumnConstraints().add(new ColumnConstraints(235));
+                    gridPane.getColumnConstraints().add(new ColumnConstraints(235));
+                    
+                    HBox contentWrapper = new HBox(gridPane);
+                    contentWrapper.setAlignment(Pos.CENTER);
+                    contentWrapper.setMinWidth(510);
+                    contentWrapper.setMaxWidth(510);
+                    contentWrapper.getStyleClass().add("contentWrapper");
+                
+                Image mapImg = new Image(getClass().getResourceAsStream("/img/map.png"));
+                JFXButton viewOnMapBtn = new JFXButton(MAPBTN_PREFIX, new ImageView(mapImg));
+                viewOnMapBtn.setOnAction(this::viewOnMap);
+                viewOnMapBtn.getStyleClass().add("mapButton");
+                
+
+            VBox propertyWrapper = new VBox(headerWrapper, contentWrapper, viewOnMapBtn);
+            propertyWrapper.setAlignment(Pos.CENTER);
+            propertyWrapper.setMinWidth(550);
+            propertyWrapper.setMaxWidth(500);
+            propertyWrapper.getStyleClass().add("propertyWrapper");
+
+        root = new BorderPane(propertyWrapper, null, null, null, null);
         root.getStyleClass().add("rootPane");
     }
     
-    /**
-     * method which displays the view
-     */
-    public HBox getView()
+    public BorderPane getView() 
     {
         return root;
     }
-    
-    /**
-     * This method is called from the favorite button
-     * 
-     */
-    private void toggleFavorite(ActionEvent e)
-    {
-        if(property.isFavorite()) {
-            property.removeFavorite();
-        }
-        else {
-            property.setFavorite();
-        }
-    }
-    
-    /**
-     * This method is called from the viewOnMapBtn button
-     * 
-     */
+
     private void viewOnMap(ActionEvent e)
     {
         try {
@@ -156,5 +242,14 @@ public class PropertyDetailsWindow
             es.printStackTrace();
         }
     }
+    
+    private void toggleFavorite(ActionEvent e)
+    {
+        if(property.isFavorite()) {
+            property.removeFavorite();
+        }
+        else {
+            property.setFavorite();
+        }
+    }
 }
-
