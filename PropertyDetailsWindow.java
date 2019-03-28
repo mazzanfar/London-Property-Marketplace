@@ -66,7 +66,6 @@ public class PropertyDetailsWindow
         GridPane hostInformationGridPane = new GridPane();
         hostInformationGridPane.getStyleClass().add("hostInformationGridPane");
         hostInformationGridPane.add(host_idLabel,0,0);
-        System.out.println("Style: " + host_idLabel.getStyle());
         hostInformationGridPane.add(getHost_idLabel,1,0);
         hostInformationGridPane.add(host_nameLabel,0,1);
         hostInformationGridPane.add(getHost_nameLabel,1,1);
