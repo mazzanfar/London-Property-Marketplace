@@ -1,81 +1,105 @@
+@font-face {
+    font-family: Roboto-Bold;
+    src: url("./+libs/Roboto-Bold.ttf");
+}
 
-/* styling for root HBox */
+/* Define accent and background color: */
+*{
+    primary-color: #FF5A5F;
+    primary-background-color: #2A2E37;
+}
+
 .rootPane {
-    -fx-background-color: #2A2E37;
-    -fx-hgap: 5;
-    -fx-vgap: 10;
-    -fx-text-fill: white;
+    -fx-background-color: primary-background-color;
+    -fx-font-family: Roboto-Bold;
+    -fx-text-fill: #fff;
+    -fx-padding: 20;
+}
+
+.boroughLabel {
+    -fx-background-color: primary-color;
+    -fx-shape: "M 240 300 L 340 240 L 440 300 L 440 400 L 340 460 L 240 400 L 240 300";
+    -fx-text-fill: #fff;
+    -fx-font-family: Roboto-Bold;
+    -fx-pref-width: 70;
+    -fx-pref-height: 75;
+    -fx-min-width: 70;
+    -fx-min-height: 75;
+    -fx-font-size: 16;
+    -fx-font-family: Roboto-Bold;
+}
+
+.headerLabel {
+    -fx-font-family: Roboto-Bold;
+    -fx-padding: 8 22 8 22;
+    -fx-font-size: 14;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 30;
+    -fx-background-color: #4a556b;
+    -fx-effect: dropshadow(three-pass-box, #303030, 3, 0, 0, 0);
+}
+
+.headerLabelWrap {
+    -fx-padding: 0 20 0 20;
+}
+
+.favoriteBtn {
+    -fx-shape: "M 220 520 L 220 520 L 300 320 L 120 200 L 340 200 L 420 20 L 500 200 L 720 200 L 540 320 L 620 520 L 420 400 L 220 520";
+    -fx-pref-width: 78;
+    -fx-pref-height: 72;
+    -fx-min-width: 78;
+    -fx-min-height: 72;
+    -fx-background-color: #fff;
+    -fx-opacity: 0.7
+}
+
+.favoriteBtn:hover {
+    -fx-background-color: #ffeb3b;
+    -fx-cursor: hand;
+}
+
+.favoriteBtn:selected {
+    -fx-background-color: #ffeb3b;
+    -fx-opacity: 1;
+    -fx-effect: dropshadow(three-pass-box, #ffeb3b, 2, 0, 0, 0);
+}
+
+.contentWrapper {
+    -fx-padding: 20;
+    -fx-background-color: #3e4554;
+    -fx-background-radius: 50px;
+}
+  
+.propertyWrapper {
+    -fx-spacing: 20px;
+}  
+
+.mapButton {
+    -fx-background-color: primary-color;
+    -fx-text-fill: #fff;
+    -fx-font-family: Roboto-Bold;
+    -fx-font-size: 14;
     -fx-padding: 10;
 }
 
-.label {
-    -fx-text-fill: inherit;
+.mapButton:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, #fff, 2, 0, 0, 0);
 }
 
-/* styling the GridPane containing the name of the property and the details about it */
-.informationGridPane {
-    -fx-background-color: #3e4554;
-    -fx-hgap: 5;
-    -fx-vgap: 10;
-    -fx-font-size: 10pt;
+.smallLabel {
+    -fx-font-family: Roboto-Bold;
+    -fx-text-fill: #fff;
+    -fx-font-size: 13;
+}
+
+.bigLabel {
+    -fx-font-family: Roboto-Bold;
     -fx-font-weight: bold;
-    -fx-padding: 0 0 10 0;
-    -fx-text-alignment: center;
-    -fx-text-fill: white;
-    -fx-background-radius: 9;
+    -fx-font-size: 15;
+    -fx-text-fill: #f7f7f7;
 }
 
-/* styling the GridPane containing details about the host */
-.hostInformationGridPane {
-    -fx-background-color: #3e4554;
-    -fx-hgap: 5;
-    -fx-vgap: 10;
-    -fx-font-size: 10pt;
-    -fx-font-weight: bold;
-    -fx-padding: 0 0 10 0;
-    -fx-text-alignment: center;
-    -fx-text-fill: white;
-    -fx-background-radius: 9;
+.labelWrap {
+    -fx-padding: 10 20 10 20;
 }
-
-/* styling the GridPane containing details about the reviews */
-.reviewGridPane {
-    -fx-background-color: #3e4554;
-    -fx-hgap: 5;
-    -fx-vgap: 10;
-    -fx-font-size: 10pt;
-    -fx-font-weight: bold;
-    -fx-padding: 0 0 10 0;
-    -fx-text-alignment: center;
-    -fx-text-fill: white;
-    -fx-background-radius: 9;
-}
-
-.favoriteButton {
-     -fx-shape: "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-        c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z";
-     -fx-background-color: #ce4a4e;
-     -fx-opacity: 0.6;
-}
-
-/* makes the button more opaque when it is hovered */
-.favoriteButton:hover {
-    -fx-background-color: #ce4a4e;
-    -fx-opacity: 0.8;
-}
-/* makes the button more opaque when it is selected and gives it a small dropshadow */
-.favoriteButton:selected {
-    -fx-background-color: #ce4a4e;
-    -fx-opacity: 1;
-    -fx-effect: dropshadow(three-passbox,#ce4a4e,2,0,0,0);
-}
-
-.mapButton {
-    -fx-background-color: #3e4554;
-    -fx-text-fill: white;
-}
-
-.
-
-    
-    
