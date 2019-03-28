@@ -131,7 +131,7 @@ public class PropertyLister extends VBox
                     JFXButton viewBtn = new JFXButton(VIEWBTN_PREFIX);
                     viewBtn.setTooltip(new Tooltip(VIEWBTN_TOOLTIP + property.getId()));
                     viewBtn.setOnAction(this::viewProperty);
-                    viewBtn.getStyleClass().add("favoritesButton");
+                    viewBtn.getStyleClass().add("viewDetails");
                     
                 // wrap the button in a VBox
                 VBox viewBtnWrapper = new VBox(viewBtn);
@@ -179,6 +179,7 @@ public class PropertyLister extends VBox
     private void updateLabel()
     {
         Label countLabel = new Label(COUNT_PREFIX + currentLoad + "/" + properties.size());
+        countLabel.getStyleClass().add("countLabel");
         getChildren().add(countLabel);
     }
     
@@ -227,9 +228,7 @@ public class PropertyLister extends VBox
         
                 // add the scene to the popup stage
                 detailsPopUpWin.setScene(newScene);
-                detailsPopUpWin.setMinWidth(600);
-                detailsPopUpWin.setMinHeight(528);
-                
+                detailsPopUpWin.setMinHeight(400);
                 // set title and show
                 detailsPopUpWin.setTitle(DETAILS_POPUP_PREFIX + id);
                 detailsPopUpWin.show();
