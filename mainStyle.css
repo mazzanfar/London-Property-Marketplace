@@ -11,7 +11,7 @@
 
 /* Styling for the main window */
 .rootPane {
-    -fx-background-color: #2A2E37;
+    -fx-background-color: primary-background-color;
     -fx-font-family: Roboto-Bold;
     -fx-text-fill: #fff;
 }
