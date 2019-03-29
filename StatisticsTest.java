@@ -5,10 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * The test class StatisticsTest.
+ * The test class StatisticsTest. This class provides the tests for the Statitics class.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author Alexis Dumon, Federico Barbero, Martin Todorov and Maximilian Ghazanfar
+ * @version 1.0
  */
 public class StatisticsTest
 {
@@ -19,6 +19,7 @@ public class StatisticsTest
     public static final int TOTAL_PROPERTIES = 53904;
     /**
      * Default constructor for test class StatisticsTest
+     * Creates a Statistics class object.
      */
     public StatisticsTest()
     {
@@ -44,27 +45,43 @@ public class StatisticsTest
     public void tearDown()
     {
     }
-
+    
+    /**
+     *  tests if average review equals 12 with error possible equal to the float delta
+     */
     @Test
     public void getAverageReviews() {
         assertEquals(12, statistics.getAverageReviews(), FLOAT_DELTA);
     }
-
+    
+    /**
+     * checks if the number of properties is correct 
+     */
     @Test
     public void getTotalProperties() { 
         assertEquals(TOTAL_PROPERTIES,statistics.getTotalProperties());
     }
-
+    
+    /**
+     * checks if number of home and apartments is equal to the right number with error possible equal to the float delta
+     */
     @Test
     public void getHomeAndApartments() {
         assertEquals(27885, statistics.getHomeAndApartments(), FLOAT_DELTA);
     }
     
+    /**
+     * checks if this method returns the actual most expensive flat
+     */
     @Test
     public void getMostExpensive() {
         assertEquals(2000000, statistics.getMostExpensive());
     }
     
+    /**
+     * checks if the number of properties within a price range is correct by testing with various price ranges all with a possible error
+     * equal to the float delta
+     */
     @Test
     public void getPropertiesWithinPriceRange() {
         assertEquals(8, statistics.getPropertiesWithinPriceRange(3500, 6507), FLOAT_DELTA);
@@ -76,6 +93,9 @@ public class StatisticsTest
         assertEquals(0, statistics.getPropertiesWithinPriceRange(4624, 4961), FLOAT_DELTA);
     }
     
+    /**
+     * checks if the method returns the correct suggested borough for various price ranges 
+     */
     @Test
     public void getSuggestedBorough() {
         assertEquals("Westminster", statistics.getSuggestedBorough(3500, 6507));
@@ -87,11 +107,17 @@ public class StatisticsTest
         assertEquals("No Borough Found", statistics.getSuggestedBorough(4624, 4961));
     }
     
+    /**
+     * checks if the method returns the correct number of properties that are close to a station
+     */
     @Test
     public void getPropertiesCloseToStation() {
         assertEquals(8066, statistics.getPropertiesCloseToStation());
     }
     
+    /**
+     * checks if method returns the correct name of the most served borough
+     */
     @Test
     public void getMostServedBorough() {
         assertEquals("Westminster", statistics.getMostServedBorough());
