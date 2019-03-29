@@ -28,10 +28,21 @@ public class Statistics {
     // close means within 200m range from station
     public static final double closeDistance = 200;
 
+    private int propertiesCloseToStation;
+    // if propertiesCloseToStation has been calculated already
+    private boolean propertiesCloseToStationCalculated;
+
+    private String mostServedBorough;
+    // if mostServedBorough has already been calculated
+    private boolean mostServedBoroughCalculated;
+
     /**
      * Constructor for Statistics
      */
     public Statistics() {
+        propertiesCloseToStationCalculated = false;
+        mostServedBoroughCalculated = false;
+
         tflStations = new TFLStationsData();
         update();
     }
@@ -55,7 +66,12 @@ public class Statistics {
      * @return double The average review from all of the properties
      */
     public double getAverageReviews() {
-        return dataArray.stream().mapToInt(e -> e.getNumberOfReviews()).average().orElse(0);
+        int totalReviews = dataArray.stream().mapToInt(AirbnbListing::getNumberOfReviews).sum();
+        return totalReviews / dataArray.size();
+
+        // small note on this:
+        // Tried using the .average() method for streams but it seems to return the
+        // wrong result. This is also arguably more readable.
     }
 
     /**
@@ -74,7 +90,7 @@ public class Statistics {
      * @return double The number of Home and Apartments
      */
     public double getHomeAndApartments() {
-        return dataArray.stream().filter(e -> e.getRoom_type() != "Private room").count();
+        return dataArray.stream().filter(e -> !e.getRoom_type().equals("Private room")).count();
     }
 
     /**
@@ -97,9 +113,7 @@ public class Statistics {
      * @return double The number of properties between the min and max price range
      */
     public double getPropertiesWithinPriceRange(int min, int max) {
-        return dataArray.stream().mapToInt(e -> {
-            return e.getMinimumNights() * e.getPrice();
-        }).filter(e -> e >= min && e <= max).count();
+        return dataArray.stream().mapToInt(AirbnbListing::getPrice).filter(e -> e >= min && e <= max).count();
     }
 
     /**
@@ -113,9 +127,8 @@ public class Statistics {
      *         in a specific borough
      */
     public double getPropertiesWithinPriceRange(int min, int max, String borough) {
-        return getSpecificBorough(borough).stream().mapToInt(e -> {
-            return e.getMinimumNights() * e.getPrice();
-        }).filter(e -> e >= min && e <= max).count();
+        return getSpecificBorough(borough).stream().mapToInt(AirbnbListing::getPrice).filter(e -> e >= min && e <= max)
+                .count();
     }
 
     /**
@@ -130,7 +143,7 @@ public class Statistics {
     public String getSuggestedBorough(int min, int max) {
         Set<String> boroughs = dataMap.getDistinctBoroughsSet();
         double maxCount = 0;
-        String maxBorough = "";
+        String maxBorough = "No Borough Found";
 
         for (String borough : boroughs) {
             double propertyCount = getPropertiesWithinPriceRange(min, max, borough);
@@ -152,18 +165,28 @@ public class Statistics {
      *         TFL station
      */
     public int getPropertiesCloseToStation() {
-        int count = 0;
+        if (!propertiesCloseToStationCalculated) {
+            int count = 0;
 
-        for (AirbnbListing listing : dataArray) {
-            for (TFLStation station : tflStations.getStations()) {
-                double distance = getDistanceBetweenGeoCoordinates(listing.getLatitude(), station.getLatitude(),
-                        listing.getLongitude(), station.getLongitude());
-                if (distance <= closeDistance)
-                    count += 1;
+            for (AirbnbListing listing : dataArray) {
+                for (TFLStation station : tflStations.getStations()) {
+                    double distance = getDistanceBetweenGeoCoordinates(listing.getLatitude(), station.getLatitude(),
+                            listing.getLongitude(), station.getLongitude());
+                    if (distance <= closeDistance) {
+                        count += 1;
+                        // there might some other station within reach but we do not
+                        // want to count the property more than once so we exit the
+                        // loop
+                        break;
+
+                    }
+                }
             }
+            propertiesCloseToStation = count;
+            propertiesCloseToStationCalculated = true;
         }
 
-        return count;
+        return propertiesCloseToStation;
     }
 
     /**
@@ -176,28 +199,37 @@ public class Statistics {
      */
 
     public String getMostServedBorough() {
-        Set<String> boroughs = dataMap.getDistinctBoroughsSet();
-        int maxCount = 0;
-        String maxBorough = "";
+        if (!mostServedBoroughCalculated) {
+            Set<String> boroughs = dataMap.getDistinctBoroughsSet();
+            int maxCount = 0;
+            String maxBorough = "";
 
-        for (String borough : boroughs) {
-            int count = 0;
-            for (AirbnbListing listing : getSpecificBorough(borough)) {
-                for (TFLStation station : tflStations.getStations()) {
-                    double distance = getDistanceBetweenGeoCoordinates(listing.getLatitude(), station.getLatitude(),
-                            listing.getLongitude(), station.getLongitude());
-                    if (distance <= closeDistance)
-                        count += 1;
-                }
+            for (String borough : boroughs) {
+                int count = 0;
+                for (AirbnbListing listing : getSpecificBorough(borough)) {
+                    for (TFLStation station : tflStations.getStations()) {
+                        double distance = getDistanceBetweenGeoCoordinates(listing.getLatitude(), station.getLatitude(),
+                                listing.getLongitude(), station.getLongitude());
+                        if (distance <= closeDistance) {
+                            count += 1;
+                            // there might some other station within reach but we do not
+                            // want to count the property more than once so we exit the
+                            // loop
+                            break;
+                        }
+                    }
 
-                if (count > maxCount) {
-                    maxCount = count;
-                    maxBorough = borough;
+                    if (count > maxCount) {
+                        maxCount = count;
+                        maxBorough = borough;
+                    }
                 }
             }
+            mostServedBorough = maxBorough;
+            mostServedBoroughCalculated = true;
         }
 
-        return maxBorough;
+        return mostServedBorough;
     }
 
     /**

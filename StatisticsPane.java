@@ -40,7 +40,8 @@ public class StatisticsPane extends ExtendedBorderPane {
     private Timeline loadingAnimation;
     private Timeline statisticsAnimation;
 
-    // TODO: MOVE THIS
+    private Thread worker;
+
     public static final int PANE_WIDTH = 700;
     public static final int PANE_HEIGHT = 500;
 
@@ -72,30 +73,41 @@ public class StatisticsPane extends ExtendedBorderPane {
 
         loadingAnimation.setCycleCount(Animation.INDEFINITE);
         statisticsAnimation.setCycleCount(Animation.INDEFINITE);
+
+        // initialize a useless worker as a reference for future workers
+        worker = new Thread();
     }
 
     /**
-     * This method is called every time the scroll bar is called. 
-     * It is responsible for drawing the animations on the GUI.
+     * This method is called every time the scroll bar is called. It is responsible
+     * for drawing the animations on the GUI.
      */
     public void updateView() {
         statisticsAnimation.stop();
-        
-        // Running the computations on a new thread allows the program to still function and not freeze while it is doing the computations. 
+        labels.clear();
+
+        // this is to stop weird behaviour when trying to call this method when it is
+        // loading,
+        // it is not the best way of avoiding this strange behaviour but should be
+        // good enough for small scale computations
+        worker.stop();
+
+        // Running the computations on a new thread allows the program to still function
+        // and not freeze while it is doing the computations.
         // Since the computations are rather long, this is a very nice workaround.
-        Thread sideCompute = new Thread(() -> {
-            // start loading animation when calling the statistics methods 
+        worker = new Thread(() -> {
+            // start loading animation when calling the statistics methods
             loadingAnimation.play();
             createLabel("Average reviews: " + format(statistics.getAverageReviews(), 2));
             createLabel("Total properties: " + format(statistics.getTotalProperties(), 0));
             createLabel("Home and Apartments: " + format(statistics.getHomeAndApartments(), 0));
             createLabel("Most expensive: " + format(statistics.getMostExpensive(), 0));
-            createLabel(
-                    "Properties within price range: " + format(statistics.getPropertiesWithinPriceRange(minPrice, maxPrice), 0));
+            createLabel("Properties within price range: "
+                    + format(statistics.getPropertiesWithinPriceRange(minPrice, maxPrice), 0));
             createLabel("Suggested borough for price range: " + statistics.getSuggestedBorough(minPrice, maxPrice));
             createLabel("Number of properties close to transportation: "
                     + format(statistics.getPropertiesCloseToStation(), 0));
-            createLabel("Most served borough (transportation):" + statistics.getMostServedBorough());
+            createLabel("Most served borough (transportation): " + statistics.getMostServedBorough());
 
             // stop animation and start displaying the statistics
             loadingAnimation.stop();
@@ -103,7 +115,7 @@ public class StatisticsPane extends ExtendedBorderPane {
             statisticsAnimation.play();
         });
 
-        sideCompute.start();
+        worker.start();
     }
 
     /**
@@ -209,8 +221,8 @@ public class StatisticsPane extends ExtendedBorderPane {
      */
     private String format(Object number, int decimalPlaces) {
         try {
-            // if decimalPlaces is 0  we want to try to cast number to 
-            // an int. 
+            // if decimalPlaces is 0 we want to try to cast number to
+            // an int.
             if (decimalPlaces == 0) {
                 try {
                     int castToInt = (int) number;
@@ -228,7 +240,7 @@ public class StatisticsPane extends ExtendedBorderPane {
             }
 
             String format = ".";
-            // insert number of decimal places inside the format for 
+            // insert number of decimal places inside the format for
             // DecimalFormat constructor
             for (int i = 0; i < decimalPlaces; i++) {
                 format += "#";
