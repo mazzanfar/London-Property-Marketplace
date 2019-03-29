@@ -126,6 +126,7 @@ public class PropertyDetailsWindow
     
     /**
      * method which displays the view
+     * @return the root of the scene
      */
     public HBox getView()
     {
@@ -149,7 +150,7 @@ public class PropertyDetailsWindow
     /**
      * This method is called from favorite button
      * 
-     * @param e
+     * @param e 
      */
     private void toggleFavorite(ActionEvent e)
     {
